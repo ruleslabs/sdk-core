@@ -1,0 +1,27 @@
+{
+  "name": "@rules/sdk-core",
+  "license": "MIT",
+  "version": "0.0.1",
+  "main": "dist/index.ts",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "module": "dist/sdk-core.esm.js",
+  "scripts": {
+    "build": "tsdx build",
+    "start": "tsdx watch",
+    "test": "tsdx test"
+  },
+  "dependencies": {
+    "tiny-invariant": "^1.2.0"
+  },
+  "devDependencies": {
+    "tsdx": "^0.14.1"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true
+  }
+}
