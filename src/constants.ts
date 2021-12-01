@@ -1,11 +1,11 @@
 export enum Drop {
-  CLASSIC,
-  LOFI,
-  DRILL,
-  BEATMAKERS
+  CLASSIC = 'Classic',
+  LOFI = 'LoFi',
+  DRILL = 'Drill',
+  BEATMAKERS = 'Beatmakers'
 }
 
-export enum Scarcity {
-  COMMON,
-  RARE
+export enum Tier {
+  COMMON = 'Common',
+  RARE = 'Rare'
 }
