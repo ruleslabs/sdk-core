@@ -10,4 +10,7 @@ export enum Tier {
   RARE = 'Rare'
 }
 
-export const LAST_SEASON = 2
+export enum Season {
+  SEASON_ONE = 'Season 1',
+  SEASON_TWO = 'Season 2'
+}
