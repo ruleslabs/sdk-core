@@ -9,3 +9,5 @@ export enum Tier {
   COMMON = 'Common',
   RARE = 'Rare'
 }
+
+export const LAST_SEASON = 2
