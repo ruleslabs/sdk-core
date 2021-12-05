@@ -3,7 +3,7 @@ import { Expertise } from './expertise'
 
 export class Creator {
   public readonly name: string
-  public readonly expertises: Expertises[]
+  public readonly expertises: Expertise[]
 
   public constructor(name: string, expertises: Expertise[]) {
     invariant(expertises.length > 0, 'EXPERTISES')
