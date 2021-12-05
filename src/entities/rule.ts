@@ -1,15 +1,18 @@
 import { Tier, Season } from '../constants'
+import { Creator } from './creator'
 
 export class Rule {
   public readonly supply: number
-  public readonly name: string
+  public readonly creator: Creator
   public readonly season: Season
-  public readonly scarcity: Tier
+  public readonly tier: Tier
+  public readonly classic: boolean
 
-  protected constructor(supply: number, name: string, season: Season, scarcity: Tier) {
+  public constructor(creator: Creator, supply: number, season: Season, tier: Tier, classic: boolean) {
     this.supply = supply
-    this.name = name
+    this.creator = creator
     this.season = season
-    this.scarcity = scarcity
+    this.tier = tier
+    this.classic = classic
   }
 }

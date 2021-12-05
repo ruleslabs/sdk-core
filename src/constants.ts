@@ -1,8 +1,7 @@
-export enum Drop {
-  CLASSIC = 'Classic',
+export enum Style {
   LOFI = 'LoFi',
   DRILL = 'Drill',
-  BEATMAKERS = 'Beatmakers'
+  LYRICIST = 'Lyricist'
 }
 
 export enum Tier {

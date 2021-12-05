@@ -1,6 +1,6 @@
 {
   "name": "@ruleslabs/sdk-core",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "An SDK to build applications on top of Rules",
   "author": "Charles Lanier <clanier.dev@gmail.com>",
   "license": "MIT",
