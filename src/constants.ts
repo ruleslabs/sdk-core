@@ -1,15 +1,22 @@
-export enum Style {
-  LOFI = 'LoFi',
-  DRILL = 'Drill',
-  LYRICIST = 'Lyricist'
-}
+import JSBI from 'jsbi'
 
-export enum Tier {
-  COMMON = 'Common',
-  RARE = 'Rare'
-}
+export type BigintIsh = number | string | JSBI
+export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
 
-export enum Season {
-  SEASON_ONE = 'Season 1',
-  SEASON_TWO = 'Season 2'
+export const ScarcityName = ['Common', 'Rare']
+
+export const Seasons: {
+  [key: number]: {
+    name: string,
+    scarcitiesMaxSupplies: {
+      [key: number]: number
+    }
+  }
+} = {
+  [1]: {
+    name: "Season 1",
+    scarcitiesMaxSupplies: {
+      [1]: 999
+    }
+  }
 }
