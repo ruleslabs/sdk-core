@@ -8,7 +8,10 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "github:ruleslabs/sdk-core",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruleslabs/sdk-core.git"
+  },
   "author": "Charles Lanier",
   "license": "MIT",
   "devDependencies": {
@@ -27,5 +30,9 @@
     "printWidth": 120,
     "semi": false,
     "singleQuote": true
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/ruleslabs/sdk-core/issues"
+  },
+  "homepage": "https://github.com/ruleslabs/sdk-core#readme"
 }
