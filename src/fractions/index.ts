@@ -1,3 +1,1 @@
-import WeiAmount from './WeiAmount'
-
-export { WeiAmount }
+export * from './WeiAmount'
