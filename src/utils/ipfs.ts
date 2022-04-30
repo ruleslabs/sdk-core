@@ -12,14 +12,14 @@ function buf2hex(buffer: Uint8Array) {
     .join('')
 }
 
-export async function parseIpfsCid(ipfsCid: string): Promise<Metadata> {
+export function parseIpfsCid(ipfsCid: string): Metadata {
   const v0 = CID.parse(ipfsCid)
   if (v0.multihash.size !== 32) throw 'wrong metadata ipfs hash format'
 
   const strHash = buf2hex(v0.multihash.digest)
   const uint256Hash: Uint256 = {
-    low: strHash.substring(0, 32),
-    high: strHash.substring(32, 64),
+    low: `0x${strHash.substring(32, 64)}`,
+    high: `0x${strHash.substring(0, 32)}`,
   }
 
   return {
