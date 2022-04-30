@@ -5,7 +5,7 @@ import Big from 'big.js'
 import { BigintIsh, MaxUint256 } from '../constants'
 import Fraction from './Fraction'
 
-export default class WeiAmount extends Fraction {
+export class WeiAmount extends Fraction {
   public readonly decimalScale: JSBI
   public static readonly decimals = 18
 
