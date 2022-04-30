@@ -8,7 +8,7 @@ function asciiToHex(str: string): string {
 }
 
 export function uint256HexToStrHex(uint256: Uint256) {
-  return `0x${uint256.high.replace('0x', '')}${uint256.low.replace('0x', '')}`
+  return `0x${uint256.high.replace('0x', '').padStart(32, '0')}${uint256.low.replace('0x', '').padStart(32, '0')}`
 }
 
 // convert the first 32 characters of a string to starknet uint256
