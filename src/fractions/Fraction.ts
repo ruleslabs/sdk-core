@@ -7,7 +7,7 @@ import { BigintIsh } from '../constants'
 
 const Big = toFormat(_Big)
 
-export default class Fraction {
+export class Fraction {
   public readonly numerator: JSBI
   public readonly denominator: JSBI
 
@@ -23,6 +23,8 @@ export default class Fraction {
     if ('numerator' in fractionish && 'denominator' in fractionish) return fractionish
     throw new Error('Could not parse fraction')
   }
+
+  // operations
 
   // performs floor division
   public get quotient(): JSBI {
@@ -44,6 +46,34 @@ export default class Fraction {
       JSBI.multiply(this.denominator, otherParsed.denominator)
     )
   }
+
+  // cmp
+
+  public lessThan(other: Fraction | BigintIsh): boolean {
+    const otherParsed = Fraction.tryParseFraction(other)
+    return JSBI.lessThan(
+      JSBI.multiply(this.numerator, otherParsed.denominator),
+      JSBI.multiply(otherParsed.numerator, this.denominator)
+    )
+  }
+
+  public equalTo(other: Fraction | BigintIsh): boolean {
+    const otherParsed = Fraction.tryParseFraction(other)
+    return JSBI.equal(
+      JSBI.multiply(this.numerator, otherParsed.denominator),
+      JSBI.multiply(otherParsed.numerator, this.denominator)
+    )
+  }
+
+  public greaterThan(other: Fraction | BigintIsh): boolean {
+    const otherParsed = Fraction.tryParseFraction(other)
+    return JSBI.greaterThan(
+      JSBI.multiply(this.numerator, otherParsed.denominator),
+      JSBI.multiply(otherParsed.numerator, this.denominator)
+    )
+  }
+
+  // format
 
   public toFixed(
     decimalPlaces: number,

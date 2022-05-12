@@ -1,9 +1,12 @@
 import JSBI from 'jsbi'
+import _Big from 'big.js'
+import toFormat from 'toformat'
 import invariant from 'tiny-invariant'
-import Big from 'big.js'
 
 import { BigintIsh, MaxUint256 } from '../constants'
-import Fraction from './Fraction'
+import { Fraction } from './Fraction'
+
+const Big = toFormat(_Big)
 
 export class WeiAmount extends Fraction {
   public readonly decimalScale: JSBI
@@ -14,8 +17,12 @@ export class WeiAmount extends Fraction {
   }
 
   public static fromEtherAmount(etherAmount: number): WeiAmount {
-    const rawAmount = Big(etherAmount).mul(Big(10).pow(WeiAmount.decimals)).toString()
+    const rawAmount = WeiAmount.rawAmountFromEtherAmount(etherAmount)
     return new WeiAmount(rawAmount)
+  }
+
+  private static rawAmountFromEtherAmount(etherAmount: number): BigintIsh {
+    return Big(etherAmount).mul(Big(10).pow(WeiAmount.decimals)).toString()
   }
 
   protected constructor(numerator: BigintIsh, denominator?: BigintIsh) {
@@ -26,6 +33,7 @@ export class WeiAmount extends Fraction {
   }
 
   public multiply(other: Fraction | BigintIsh): WeiAmount {
+    Big
     const multiplied = super.multiply(other)
     return new WeiAmount(multiplied.numerator, multiplied.denominator)
   }
