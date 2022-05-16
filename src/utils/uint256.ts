@@ -11,6 +11,15 @@ export function uint256HexToStrHex(uint256: Uint256) {
   return `0x${uint256.high.replace('0x', '').padStart(32, '0')}${uint256.low.replace('0x', '').padStart(32, '0')}`
 }
 
+export function uint256HexFromStrHex(str: string): Uint256 {
+  const formatedStr = str.replace('0x', '').padStart(64, '0')
+
+  return {
+    low: `0x${formatedStr.substring(32, 64)}`,
+    high: `0x${formatedStr.substring(0, 32)}`,
+  }
+}
+
 // convert the first 32 characters of a string to starknet uint256
 export function strToUint256(str: string): Uint256 {
   const low = asciiToHex(str.substring(0, 16))
