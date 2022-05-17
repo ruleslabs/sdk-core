@@ -3,7 +3,7 @@ import JSBI from 'jsbi'
 export type BigintIsh = number | string | JSBI
 export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
 
-export const ScarcityName = ['Common', 'Rare']
+export const ScarcityName = ['Common', 'Platinium']
 
 export const Seasons: {
   [key: number]: {
