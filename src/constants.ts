@@ -16,7 +16,7 @@ export const Seasons: {
   [1]: {
     name: "Season 1",
     scarcitiesMaxSupplies: {
-      [1]: 999
+      [1]: 350
     }
   }
 }
