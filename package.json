@@ -1,6 +1,6 @@
 {
   "name": "@rulesorg/sdk-core",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "An SDK to build applications on top of Rules",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
