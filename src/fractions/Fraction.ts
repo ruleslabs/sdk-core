@@ -77,12 +77,15 @@ export class Fraction {
 
   public toFixed(
     decimalPlaces: number,
+    roundingMode: number = 1, // rm {number} Rounding mode: 0 (down), 1 (half-up), 2 (half-even) or 3 (up)
     format: object = { groupSeparator: '' },
   ): string {
     invariant(Number.isInteger(decimalPlaces), `${decimalPlaces} is not an integer.`)
     invariant(decimalPlaces >= 0, `${decimalPlaces} is negative.`)
 
     Big.DP = decimalPlaces
-    return new Big(this.numerator.toString()).div(this.denominator.toString()).toFormat(decimalPlaces, format)
+    return new Big(this.numerator.toString())
+      .div(this.denominator.toString())
+      .toFormat(decimalPlaces, roundingMode, format)
   }
 }

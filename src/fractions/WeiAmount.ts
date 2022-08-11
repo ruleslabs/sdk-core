@@ -40,9 +40,10 @@ export class WeiAmount extends Fraction {
 
   public toFixed(
     decimalPlaces: number = WeiAmount.decimals,
+    roundingMode?: number,
     format?: object,
   ): string {
     invariant(decimalPlaces <= WeiAmount.decimals, 'DECIMALS')
-    return super.divide(this.decimalScale).toFixed(decimalPlaces, format)
+    return super.divide(this.decimalScale).toFixed(decimalPlaces, roundingMode, format)
   }
 }
