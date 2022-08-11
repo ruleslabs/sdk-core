@@ -1,10 +1,12 @@
 import JSBI from 'jsbi'
 import _Big from 'big.js'
+import _Decimal from 'decimal.js-light'
 import toFormat from 'toformat'
 import invariant from 'tiny-invariant'
 
 import { BigintIsh } from '../constants'
 
+const Decimal = toFormat(_Decimal)
 const Big = toFormat(_Big)
 
 export class Fraction {
@@ -71,6 +73,23 @@ export class Fraction {
       JSBI.multiply(this.numerator, otherParsed.denominator),
       JSBI.multiply(otherParsed.numerator, this.denominator)
     )
+  }
+
+  // significant
+
+  public toSignificant(
+    significantDigits: number,
+    roundingMode: number = 1, // rm {number} Rounding mode: 0 (down), 1 (half-up), 2 (half-even) or 3 (up)
+    format: object = { groupSeparator: '' },
+  ): string {
+    invariant(Number.isInteger(significantDigits), `${significantDigits} is not an integer.`)
+    invariant(significantDigits > 0, `${significantDigits} is not positive.`)
+
+    Decimal.set({ precision: significantDigits + 1, rounding: roundingMode })
+    const quotient = new Decimal(this.numerator.toString())
+      .div(this.denominator.toString())
+      .toSignificantDigits(significantDigits)
+    return quotient.toFormat(quotient.decimalPlaces(), format)
   }
 
   // format
