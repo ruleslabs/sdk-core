@@ -83,7 +83,6 @@ export class Fraction {
     invariant(Number.isInteger(decimalPlaces), `${decimalPlaces} is not an integer.`)
     invariant(decimalPlaces >= 0, `${decimalPlaces} is negative.`)
 
-    Big.DP = decimalPlaces
     return new Big(this.numerator.toString())
       .div(this.denominator.toString())
       .toFormat(decimalPlaces, roundingMode, format)
