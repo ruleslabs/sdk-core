@@ -38,6 +38,14 @@ export class WeiAmount extends Fraction {
     return new WeiAmount(multiplied.numerator, multiplied.denominator)
   }
 
+  public toSignificant(
+    significantDigits: number = 6,
+    roundingMode?: number,
+    format?: object,
+  ): string {
+    return super.divide(this.decimalScale).toSignificant(significantDigits, roundingMode, format)
+  }
+
   public toFixed(
     decimalPlaces: number = WeiAmount.decimals,
     roundingMode?: number,
