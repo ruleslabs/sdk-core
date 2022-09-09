@@ -7,6 +7,8 @@ import { BigintIsh, MaxUint256 } from '../constants'
 import { Fraction } from './Fraction'
 
 const Big = toFormat(_Big)
+Big.PE = 1000000
+Big.NE = -1000000
 
 export class WeiAmount extends Fraction {
   public readonly decimalScale: JSBI
