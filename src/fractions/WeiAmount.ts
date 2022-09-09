@@ -16,12 +16,12 @@ export class WeiAmount extends Fraction {
     return new WeiAmount(rawAmount)
   }
 
-  public static fromEtherAmount(etherAmount: number): WeiAmount {
+  public static fromEtherAmount(etherAmount: number | string): WeiAmount {
     const rawAmount = WeiAmount.rawAmountFromEtherAmount(etherAmount)
     return new WeiAmount(rawAmount)
   }
 
-  private static rawAmountFromEtherAmount(etherAmount: number): BigintIsh {
+  private static rawAmountFromEtherAmount(etherAmount: number | string): BigintIsh {
     return Big(etherAmount).mul(Big(10).pow(WeiAmount.decimals)).toString()
   }
 
