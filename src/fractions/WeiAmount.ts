@@ -34,11 +34,29 @@ export class WeiAmount extends Fraction {
     this.decimalScale = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(WeiAmount.decimals))
   }
 
+  // operations
+
+  public add(other: Fraction | BigintIsh): WeiAmount {
+    const added = super.add(other)
+    return new WeiAmount(added.numerator, added.denominator)
+  }
+
+  public subtract(other: Fraction | BigintIsh): WeiAmount {
+    const subtracted = super.subtract(other)
+    return new WeiAmount(subtracted.numerator, subtracted.denominator)
+  }
+
   public multiply(other: Fraction | BigintIsh): WeiAmount {
-    Big
     const multiplied = super.multiply(other)
     return new WeiAmount(multiplied.numerator, multiplied.denominator)
   }
+
+  public divide(other: Fraction | BigintIsh): WeiAmount {
+    const divided = super.divide(other)
+    return new WeiAmount(divided.numerator, divided.denominator)
+  }
+
+  // conversion
 
   public toSignificant(
     significantDigits: number = 6,

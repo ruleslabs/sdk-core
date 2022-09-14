@@ -28,6 +28,34 @@ export class Fraction {
 
   // operations
 
+  public add(other: Fraction | BigintIsh): Fraction {
+    const otherParsed = Fraction.tryParseFraction(other)
+    if (JSBI.equal(this.denominator, otherParsed.denominator))
+      return new Fraction(JSBI.add(this.numerator, otherParsed.numerator), this.denominator)
+
+    return new Fraction(
+      JSBI.add(
+        JSBI.multiply(this.numerator, otherParsed.denominator),
+        JSBI.multiply(otherParsed.numerator, this.denominator)
+      ),
+      JSBI.multiply(this.denominator, otherParsed.denominator)
+    )
+  }
+
+  public subtract(other: Fraction | BigintIsh): Fraction {
+    const otherParsed = Fraction.tryParseFraction(other)
+    if (JSBI.equal(this.denominator, otherParsed.denominator))
+      return new Fraction(JSBI.subtract(this.numerator, otherParsed.numerator), this.denominator)
+
+    return new Fraction(
+      JSBI.subtract(
+        JSBI.multiply(this.numerator, otherParsed.denominator),
+        JSBI.multiply(otherParsed.numerator, this.denominator)
+      ),
+      JSBI.multiply(this.denominator, otherParsed.denominator)
+    )
+  }
+
   // performs floor division
   public get quotient(): JSBI {
     return JSBI.divide(this.numerator, this.denominator)
