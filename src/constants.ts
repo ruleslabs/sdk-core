@@ -25,3 +25,7 @@ export const Seasons: {
 
 export const MINIMUM_ETH_BALANCE_TO_ESCAPE_SIGNER = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(15)) // 0.001 ETH
 export const ESCAPE_SECURITY_PERIOD = 7 * 24 * 60 * 60 // 7 days
+
+// Version
+
+export const LAST_WALLET_VERSION = '0.2.0'
