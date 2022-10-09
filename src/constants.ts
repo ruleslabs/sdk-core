@@ -28,4 +28,4 @@ export const ESCAPE_SECURITY_PERIOD = 7 * 24 * 60 * 60 // 7 days
 
 // Version
 
-export const LAST_WALLET_VERSION = '0.2.0'
+export const LATEST_ACCOUNT_VERSION = '0.2.0'
