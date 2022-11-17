@@ -1,4 +1,4 @@
-export default class Version {
+export class Version {
   public readonly str: string
   public readonly major: number
   public readonly minor: number

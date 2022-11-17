@@ -1,4 +1,4 @@
-export default function slugify(str: string) {
+export function slugify(str: string) {
   const from = 'ãàáäâẽèéëêìíïîõòóöôùúüûñç$·/_,:;'
   const to = 'aaaaaeeeeeiiiiooooouuuuncs------'
 
