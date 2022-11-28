@@ -72,7 +72,7 @@ export interface TransferSingleEvent extends EventBase {
 
 // events parser
 
-type ParsedEvent =
+export type ParsedEvent =
   ApprovalForAllEvent |
   ApprovalEvent |
   OfferAcceptedEvent |
