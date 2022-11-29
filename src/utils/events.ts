@@ -81,6 +81,8 @@ export type ParsedEvent =
   TransferSingleEvent |
   TransferSingleEvent[]
 
+const nullAddressFilter = (addresses: string[]): string[] => addresses.filter((address) => address !== '0x0')
+
 export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]] | [] {
   switch (key) {
     case EventKeys.TRANSFER_SINGLE:
@@ -94,7 +96,7 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           amount: Number(uint256HexToStrHex({ low: data[5], high: data[6] })),
           type: Number(data[3]) * Number(data[4]) ? 'card' : 'pack', // if low and high are both != 0, it's a card
         },
-        [data[0], data[1], data[2]],
+        nullAddressFilter([data[0], data[1], data[2]]),
       ]
 
     case EventKeys.TRANSFER_BATCH:
@@ -128,7 +130,7 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           seller: data[2],
           price: data[3],
         },
-        [data[2]],
+        nullAddressFilter([data[2]]),
       ]
 
     case EventKeys.OFFER_CANCELED:
@@ -147,7 +149,7 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           tokenId: uint256HexToStrHex({ low: data[0], high: data[1] }),
           buyer: data[2],
         },
-        [data[2]],
+        nullAddressFilter([data[2]]),
       ]
 
     case EventKeys.APPROVAL:
@@ -160,7 +162,7 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           amount: Number(uint256HexToStrHex({ low: data[4], high: data[5] })),
           type: Number(data[2]) * Number(data[3]) ? 'card' : 'pack', // if low and high are both != 0, it's a card
         },
-        [data[0], data[1]],
+        nullAddressFilter([data[0], data[1]]),
       ]
 
     case EventKeys.APPROVAL_FOR_ALL:
@@ -171,7 +173,7 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           operator: data[1],
           approved: data[2] !== '0x0',
         },
-        [data[0], data[1]],
+        nullAddressFilter([data[0], data[1]]),
       ]
   }
 
