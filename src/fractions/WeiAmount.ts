@@ -10,28 +10,38 @@ const Big = toFormat(_Big)
 Big.PE = 1000000
 Big.NE = -1000000
 
+type Unit = 'ether' | 'gwei'
+
 export class WeiAmount extends Fraction {
   public readonly decimalScale: JSBI
-  public static readonly decimals = 18
 
-  public static fromRawAmount(rawAmount: BigintIsh): WeiAmount {
-    return new WeiAmount(rawAmount)
+  public static readonly decimals = 18
+  public static readonly gweiDecimals = 9
+
+  public static fromRawAmount(rawAmount: BigintIsh, unit: Unit = 'ether'): WeiAmount {
+    return new WeiAmount(rawAmount, 1, unit)
   }
 
-  public static fromEtherAmount(etherAmount: number | string): WeiAmount {
+  public static fromEtherAmount(etherAmount: number | string, unit: Unit = 'ether'): WeiAmount {
     const rawAmount = WeiAmount.rawAmountFromEtherAmount(etherAmount)
-    return new WeiAmount(rawAmount)
+    return new WeiAmount(rawAmount, 1, unit)
   }
 
   private static rawAmountFromEtherAmount(etherAmount: number | string): BigintIsh {
     return Big(etherAmount).mul(Big(10).pow(WeiAmount.decimals)).toString()
   }
 
-  protected constructor(numerator: BigintIsh, denominator?: BigintIsh) {
+  protected constructor(numerator: BigintIsh, denominator?: BigintIsh, unit: Unit = 'ether') {
     super(numerator, denominator)
     invariant(JSBI.lessThanOrEqual(this.quotient, MaxUint256), 'AMOUNT')
 
-    this.decimalScale = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(WeiAmount.decimals))
+    switch (unit) {
+      case 'gwei':
+        this.decimalScale = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(WeiAmount.gweiDecimals))
+
+      default:
+        this.decimalScale = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(WeiAmount.decimals))
+    }
   }
 
   // operations
