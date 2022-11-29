@@ -18,11 +18,11 @@ export class WeiAmount extends Fraction {
   public static readonly decimals = 18
   public static readonly gweiDecimals = 9
 
-  public static fromRawAmount(rawAmount: BigintIsh, unit: Unit = 'ether'): WeiAmount {
+  public static fromRawAmount(rawAmount: BigintIsh, unit?: Unit): WeiAmount {
     return new WeiAmount(rawAmount, 1, unit)
   }
 
-  public static fromEtherAmount(etherAmount: number | string, unit: Unit = 'ether'): WeiAmount {
+  public static fromEtherAmount(etherAmount: number | string, unit?: Unit): WeiAmount {
     const rawAmount = WeiAmount.rawAmountFromEtherAmount(etherAmount)
     return new WeiAmount(rawAmount, 1, unit)
   }
@@ -38,6 +38,7 @@ export class WeiAmount extends Fraction {
     switch (unit) {
       case 'gwei':
         this.decimalScale = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(WeiAmount.gweiDecimals))
+        break
 
       default:
         this.decimalScale = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(WeiAmount.decimals))
