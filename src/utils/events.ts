@@ -18,6 +18,8 @@ export const EventKeys = {
 
   APPROVAL: hash.getSelectorFromName('Approval'),
   APPROVAL_FOR_ALL: hash.getSelectorFromName('ApprovalForAll'),
+
+  TRANSFER: hash.getSelectorFromName('Transfer'),
 }
 
 interface EventBase {
@@ -70,6 +72,13 @@ export interface TransferSingleEvent extends EventBase {
   type: 'pack' | 'card'
 }
 
+export interface TransferEvent extends EventBase {
+  from: string
+  to: string
+  value: string
+  type: 'eth'
+}
+
 // events parser
 
 export type ParsedEvent =
@@ -79,7 +88,8 @@ export type ParsedEvent =
   OfferCanceledEvent |
   OfferCreatedEvent |
   TransferSingleEvent |
-  TransferSingleEvent[]
+  TransferSingleEvent[] |
+  TransferEvent
 
 const nullAddressFilter = (addresses: string[]): string[] => addresses.filter((address) => address !== '0x0')
 
@@ -172,6 +182,18 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           owner: data[0],
           operator: data[1],
           approved: data[2] !== '0x0',
+        },
+        nullAddressFilter([data[0], data[1]]),
+      ]
+
+    case EventKeys.TRANSFER:
+      return [
+        {
+          key: EventKeys.TRANSFER,
+          from: data[0],
+          to: data[1],
+          value: uint256HexToStrHex({ low: data[2], high: data[3] }),
+          type: 'eth',
         },
         nullAddressFilter([data[0], data[1]]),
       ]
