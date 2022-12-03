@@ -30,3 +30,20 @@ export const ESCAPE_SECURITY_PERIOD = 7 * 24 * 60 * 60 // 7 days
 // Version
 
 export const LATEST_ACCOUNT_VERSION = '0.2.0'
+
+// tx actions
+
+export enum StarknetTransactionAction {
+  ACCOUNT_DEPLOYMENT = 'account-deployment',
+  PACKS_DELIVERY = 'packs-delivery',
+  PACKS_OPENING_PREPARATION = 'packs-opening-preparation',
+  PACKS_OPENING = 'packs-opening',
+  WALLET_UPGRADE = 'wallet-upgrade',
+  SIGNER_ESCAPE_TRIGGERED = 'signer-escape-triggered',
+  SIGNER_ESCAPED = 'signer-escaped',
+  WITHDRAW = 'withdraw',
+  CARD_TRANSFER = 'card-transfer',
+  OFFER_CREATION = 'offer-creation',
+  OFFER_CANCELLATION = 'offer-cancellation',
+  OFFER_ACCEPTANCE = 'offer-acceptance',
+}
