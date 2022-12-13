@@ -79,6 +79,13 @@ export interface TransferEvent extends EventBase {
   type: 'eth'
 }
 
+// Account
+
+export interface AccountInitializedEvent extends EventBase {
+  signerPublicKey: string
+  guardianPublicKey: string
+}
+
 // events parser
 
 export type ParsedEvent =
@@ -89,7 +96,8 @@ export type ParsedEvent =
   OfferCreatedEvent |
   TransferSingleEvent |
   TransferSingleEvent[] |
-  TransferEvent
+  TransferEvent |
+  AccountInitializedEvent
 
 const nullAddressFilter = (addresses: string[]): string[] => addresses.filter((address) => address !== '0x0')
 
@@ -196,6 +204,16 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           type: 'eth',
         },
         nullAddressFilter([data[0], data[1]]),
+      ]
+
+    case EventKeys.ACCOUNT_INITIALIZED:
+      return [
+        {
+          key: EventKeys.ACCOUNT_INITIALIZED,
+          signerPublicKey: data[0],
+          guardianPublicKey: data[1],
+        },
+        [],
       ]
   }
 
