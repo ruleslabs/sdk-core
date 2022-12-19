@@ -47,3 +47,7 @@ export enum StarknetTransactionAction {
   OFFER_CANCELLATION = 'offer-cancellation',
   OFFER_ACCEPTANCE = 'offer-acceptance',
 }
+
+// C-Score
+
+export const C_SCORE_CARD_MODELS_COUNT_SHIFT = 1_000_000
