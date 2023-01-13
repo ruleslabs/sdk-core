@@ -48,6 +48,13 @@ export enum StarknetTransactionAction {
   OFFER_ACCEPTANCE = 'offer-acceptance',
 }
 
+// wallet lock
+
+export enum StarknetWalletLockingReason {
+  SIGNER_ESCAPE = 'signer-escape',
+  FORCED_UPGRADE = 'forced-upgrade',
+}
+
 // C-Score
 
 export const C_SCORE_CARD_MODELS_COUNT_SHIFT = 1_000_000
