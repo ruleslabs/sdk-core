@@ -11,6 +11,7 @@ export const EventKeys = {
 
   SIGNER_ESCAPE_TRIGGERED: hash.getSelectorFromName('SignerEscapeTriggered'),
   SIGNER_ESCAPED: hash.getSelectorFromName('SignerEscaped'),
+  SIGNER_PUBLIC_KEY_CHANGED: hash.getSelectorFromName('SignerPublicKeyChanged'),
 
   OFFER_CREATED: hash.getSelectorFromName('OfferCreated'),
   OFFER_CANCELED: hash.getSelectorFromName('OfferCanceled'),
@@ -86,6 +87,10 @@ export interface AccountInitializedEvent extends EventBase {
   guardianPublicKey: string
 }
 
+export interface SignerPublicKeyChangedEvent extends EventBase {
+  newPublicKey: string
+}
+
 // events parser
 
 export type ParsedEvent =
@@ -97,7 +102,8 @@ export type ParsedEvent =
   TransferSingleEvent |
   TransferSingleEvent[] |
   TransferEvent |
-  AccountInitializedEvent
+  AccountInitializedEvent |
+  SignerPublicKeyChangedEvent
 
 const nullAddressFilter = (addresses: string[]): string[] => addresses.filter((address) => address !== '0x0')
 
@@ -212,6 +218,15 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           key: EventKeys.ACCOUNT_INITIALIZED,
           signerPublicKey: data[0],
           guardianPublicKey: data[1],
+        },
+        [],
+      ]
+
+    case EventKeys.SIGNER_PUBLIC_KEY_CHANGED:
+      return [
+        {
+          key: EventKeys.SIGNER_PUBLIC_KEY_CHANGED,
+          newPublicKey: data[0],
         },
         [],
       ]
