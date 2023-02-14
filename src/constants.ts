@@ -8,16 +8,28 @@ export const ScarcityName = ['Common', 'Platinium', 'Halloween']
 export const Seasons: {
   [key: number]: {
     name: string,
-    scarcitiesMaxSupplies: {
-      [key: number]: number
+    scarcities: {
+      [key: number]: {
+        maxSupply?: number
+        maxLowSerial: number
+      }
     }
   }
 } = {
   [1]: {
     name: "Season 1",
-    scarcitiesMaxSupplies: {
-      [1]: 350,
-      [2]: 2175,
+    scarcities: {
+      [0]: {
+        maxLowSerial: 100,
+      },
+      [1]: {
+        maxSupply: 350,
+        maxLowSerial: 20,
+      },
+      [2]: {
+        maxSupply: 2175,
+        maxLowSerial: 100,
+      },
     },
   },
 }
