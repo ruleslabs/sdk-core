@@ -10,44 +10,35 @@ const Big = toFormat(_Big)
 Big.PE = 1000000
 Big.NE = -1000000
 
-type Unit = 'ether' | 'gwei' | 'wei'
+export enum Unit {
+  WEI = 0,
+  GWEI = 9,
+  ETHER = 18,
+}
+
+const decimalScaleForDecimals = (decimals: number) => JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(decimals))
 
 export class WeiAmount extends Fraction {
-  public readonly decimalScale: JSBI
+  public static readonly decimals = Unit.ETHER
 
-  public static readonly decimals = 18
-  public static readonly gweiDecimals = 9
-  public static readonly etherDecimals = 0
+  public readonly decimalScale = decimalScaleForDecimals(WeiAmount.decimals)
 
-  public static fromRawAmount(rawAmount: BigintIsh, unit?: Unit): WeiAmount {
-    return new WeiAmount(rawAmount, 1, unit)
+  public static fromRawAmount(rawAmount: BigintIsh): WeiAmount {
+    return new WeiAmount(rawAmount, 1)
   }
 
   public static fromEtherAmount(etherAmount: number | string, unit?: Unit): WeiAmount {
     const rawAmount = WeiAmount.rawAmountFromEtherAmount(etherAmount)
-    return new WeiAmount(rawAmount, 1, 'ether')
+    return new WeiAmount(rawAmount, 1)
   }
 
   private static rawAmountFromEtherAmount(etherAmount: number | string): BigintIsh {
-    return Big(etherAmount).mul(Big(10).pow(WeiAmount.decimals)).toString()
+    return Big(etherAmount).mul(Big(10).pow(WeiAmount.decimals)).toFixed(0)
   }
 
-  protected constructor(numerator: BigintIsh, denominator?: BigintIsh, unit: Unit = 'wei') {
+  protected constructor(numerator: BigintIsh, denominator?: BigintIsh) {
     super(numerator, denominator)
     invariant(JSBI.lessThanOrEqual(this.quotient, MaxUint256), 'AMOUNT')
-
-    switch (unit) {
-      case 'ether':
-        this.decimalScale = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(WeiAmount.etherDecimals))
-        break
-
-      case 'gwei':
-        this.decimalScale = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(WeiAmount.gweiDecimals))
-        break
-
-      case 'wei':
-        this.decimalScale = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(WeiAmount.decimals))
-    }
   }
 
   // operations
@@ -72,7 +63,7 @@ export class WeiAmount extends Fraction {
     return new WeiAmount(divided.numerator, divided.denominator)
   }
 
-  // conversion
+  // conversions
 
   public toSignificant(
     significantDigits: number = 6,
@@ -89,5 +80,28 @@ export class WeiAmount extends Fraction {
   ): string {
     invariant(decimalPlaces <= WeiAmount.decimals, 'DECIMALS')
     return super.divide(this.decimalScale).toFixed(decimalPlaces, roundingMode, format)
+  }
+
+  // unit conversions
+
+  public toUnitSignificant(
+    unit: Unit,
+    significantDigits: number = 6,
+    roundingMode?: number,
+    format?: object,
+  ): string {
+    return super.divide(decimalScaleForDecimals(unit)).toSignificant(significantDigits, roundingMode, format)
+  }
+
+  public toUnitFixed(
+    unit: Unit,
+    decimalPlaces?: number,
+    roundingMode?: number,
+    format?: object,
+  ): string {
+    if (decimalPlaces === undefined) decimalPlaces = unit
+    invariant(decimalPlaces <= unit, 'DECIMALS')
+
+    return super.divide(decimalScaleForDecimals(unit)).toFixed(decimalPlaces, roundingMode, format)
   }
 }
