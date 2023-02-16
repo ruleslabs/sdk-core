@@ -8,7 +8,7 @@ export interface ParsedCScore {
 export function parseCScore(cScore: number): ParsedCScore {
 	return {
     cardModelsCount: Math.floor(cScore / C_SCORE_CARD_MODELS_COUNT_SHIFT),
-    lowestSerialsTotal: cScore % C_SCORE_CARD_MODELS_COUNT_SHIFT,
+    lowestSerialsTotal: C_SCORE_CARD_MODELS_COUNT_SHIFT - cScore % C_SCORE_CARD_MODELS_COUNT_SHIFT,
   }
 }
 
