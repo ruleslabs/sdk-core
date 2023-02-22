@@ -22,7 +22,6 @@ export const Seasons: {
     scarcities: {
       [0]: {
         maxLowSerial: 100,
-        cScoreCoeff: 10_000,
       },
       [1]: {
         maxSupply: 350,
