@@ -12,6 +12,7 @@ export const Seasons: {
       [key: number]: {
         maxSupply?: number
         maxLowSerial: number
+        cScoreCoeff?: number
       }
     }
   }
@@ -21,14 +22,17 @@ export const Seasons: {
     scarcities: {
       [0]: {
         maxLowSerial: 100,
+        cScoreCoeff: 10_000,
       },
       [1]: {
         maxSupply: 350,
         maxLowSerial: 20,
+        cScoreCoeff: 10,
       },
       [2]: {
         maxSupply: 2175,
         maxLowSerial: 100,
+        cScoreCoeff: 2.5,
       },
     },
   },
@@ -69,4 +73,4 @@ export enum StarknetWalletLockingReason {
 
 // C-Score
 
-export const C_SCORE_CARD_MODELS_COUNT_SHIFT = 1_000_000_000
+export const C_SCORE_GLOBAL_MULTIPLICATOR = 100_000
