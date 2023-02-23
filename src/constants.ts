@@ -72,4 +72,4 @@ export enum StarknetWalletLockingReason {
 
 // C-Score
 
-export const C_SCORE_GLOBAL_MULTIPLICATOR = 100_000
+export const C_SCORE_GLOBAL_MULTIPLICATOR = 1_000
