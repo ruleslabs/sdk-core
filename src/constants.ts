@@ -61,6 +61,7 @@ export enum StarknetTransactionAction {
   OFFER_CREATION = 'offer-creation',
   OFFER_CANCELLATION = 'offer-cancellation',
   OFFER_ACCEPTANCE = 'offer-acceptance',
+  LIVE_REWARDS_DELIVERY = 'live-rewards-delivery',
 }
 
 // wallet lock
