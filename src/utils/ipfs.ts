@@ -8,13 +8,18 @@ export interface Metadata {
   multihashIdentifier: number
 }
 
+export interface FeltMetadata {
+  hash: string
+  multihashIdentifier: number
+}
+
 function buf2hex(buffer: Uint8Array) {
   return [...new Uint8Array(buffer)]
     .map((x) => x.toString(16).padStart(2, '0'))
     .join('')
 }
 
-export function parseIpfsCid(ipfsCid: string): Metadata {
+export function ipfsCidToMetadata(ipfsCid: string): Metadata {
   const v0 = CID.parse(ipfsCid)
   if (v0.multihash.size !== 32) throw 'wrong metadata ipfs hash format'
 
@@ -26,6 +31,19 @@ export function parseIpfsCid(ipfsCid: string): Metadata {
 
   return {
     hash: uint256Hash,
+    multihashIdentifier: v0.multihash.code << 8 | v0.multihash.size
+  }
+}
+
+export function ipfsCidToFeltMetadata(ipfsCid: string): FeltMetadata {
+  const v0 = CID.parse(ipfsCid)
+  if (v0.multihash.size !== 32) throw 'wrong metadata ipfs hash format'
+
+  const strHash = buf2hex(v0.multihash.digest)
+  const feltHash = `0x${strHash}`
+
+  return {
+    hash: feltHash,
     multihashIdentifier: v0.multihash.code << 8 | v0.multihash.size
   }
 }
