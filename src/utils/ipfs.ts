@@ -72,7 +72,7 @@ export async function findIpfsNonceForFeltMetadata(json: any): Promise<IpfsHashW
   let ipfsHash: string | undefined
 
   do {
-    json.nonce = json.nonce ? json.nonce + 1 : 0
+    json.nonce = json.nonce !== undefined ? json.nonce + 1 : 0
     ipfsHash = await Hash.of(JSON.stringify(json))
   } while (!isIpfsCidValid(ipfsHash))
 
