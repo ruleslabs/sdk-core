@@ -68,12 +68,13 @@ export interface IpfsHashWithNonce {
   nonce: number
 }
 
-export async function findNonceForFeltMetadata(json: any): Promise<IpfsHashWithNonce> {
+export async function findIpfsNonceForFeltMetadata(json: any): Promise<IpfsHashWithNonce> {
   let ipfsHash: string | undefined
 
-  for (json.nonce = 1; !ipfsHash || !isIpfsCidValid(ipfsHash); ++json.nonce) {
+  do {
+    json.nonce = json.nonce ? json.nonce + 1 : 0
     ipfsHash = await Hash.of(JSON.stringify(json))
-  }
+  } while (!isIpfsCidValid(ipfsHash))
 
   return { ipfsHash, nonce: json.nonce }
 }
