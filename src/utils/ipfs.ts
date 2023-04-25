@@ -1,4 +1,5 @@
 import { CID } from 'multiformats/cid'
+import * as Hash from 'typestub-ipfs-only-hash'
 
 import { Uint256 } from './uint256'
 import { CAIRO_FIELD_PRIME_CID } from '@/constants'
@@ -60,4 +61,19 @@ export function isIpfsCidValid(ipfsCid: string): boolean {
   }
 
   return false
+}
+
+export interface IpfsHashWithNonce {
+  ipfsHash: string
+  nonce: number
+}
+
+export async function findNonceForFeltMetadata(json: any): Promise<IpfsHashWithNonce> {
+  let ipfsHash: string | undefined
+
+  for (json.nonce = 1; !ipfsHash || !isIpfsCidValid(ipfsHash); ++json.nonce) {
+    ipfsHash = await Hash.of(JSON.stringify(json))
+  }
+
+  return { ipfsHash, nonce: json.nonce }
 }
