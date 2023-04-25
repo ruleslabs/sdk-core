@@ -74,3 +74,7 @@ export enum StarknetWalletLockingReason {
 // C-Score
 
 export const C_SCORE_GLOBAL_MULTIPLICATOR = 1_000
+
+// IPFS
+
+export const CAIRO_FIELD_PRIME_CID = 'QmNssyH6oBvgZBcS7pB8v7hUbBx2ntxfd5NdBY6kyFtHje' // 0x1220 - CAIRO_FIELD_PRIME

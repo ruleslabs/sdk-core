@@ -1,5 +1,7 @@
 import { CID } from 'multiformats/cid'
+
 import { Uint256 } from './uint256'
+import { CAIRO_FIELD_PRIME_CID } from '@/constants'
 
 export interface Metadata {
   hash: Uint256
@@ -26,4 +28,18 @@ export function parseIpfsCid(ipfsCid: string): Metadata {
     hash: uint256Hash,
     multihashIdentifier: v0.multihash.code << 8 | v0.multihash.size
   }
+}
+
+export function isIpfsCidValid(ipfsCid: string): boolean {
+  if (ipfsCid.length !== CAIRO_FIELD_PRIME_CID.length) {
+    return ipfsCid.length < CAIRO_FIELD_PRIME_CID.length
+  }
+
+  for (let i = 0; i < CAIRO_FIELD_PRIME_CID.length; ++i) {
+    if (CAIRO_FIELD_PRIME_CID.charCodeAt(i) !== ipfsCid.charCodeAt(i)) {
+      return CAIRO_FIELD_PRIME_CID.charCodeAt(i) > ipfsCid.charCodeAt(i)
+    }
+  }
+
+  return false
 }
