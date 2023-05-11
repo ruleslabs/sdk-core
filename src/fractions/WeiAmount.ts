@@ -3,8 +3,9 @@ import _Big from 'big.js'
 import toFormat from 'toformat'
 import invariant from 'tiny-invariant'
 
-import { BigintIsh, MaxUint256 } from '../constants'
+import { MaxUint256 } from '../constants'
 import { Fraction } from './Fraction'
+import { BigintIsh } from '../types'
 
 const Big = toFormat(_Big)
 Big.PE = 1000000
@@ -27,7 +28,7 @@ export class WeiAmount extends Fraction {
     return new WeiAmount(rawAmount, 1)
   }
 
-  public static fromEtherAmount(etherAmount: number | string, unit?: Unit): WeiAmount {
+  public static fromEtherAmount(etherAmount: number | string): WeiAmount {
     const rawAmount = WeiAmount.rawAmountFromEtherAmount(etherAmount)
     return new WeiAmount(rawAmount, 1)
   }

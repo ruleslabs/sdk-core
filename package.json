@@ -3,8 +3,8 @@
   "version": "0.10.26",
   "description": "An SDK to build applications on top of Rules",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && tsc-alias"
+    "build": "tsdx build",
+    "prepublishOnly": "yarn build"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,20 +12,22 @@
     "type": "git",
     "url": "git+https://github.com/ruleslabs/sdk-core.git"
   },
-  "author": "Charles Lanier",
+  "author": "0xChqrles",
   "license": "MIT",
   "devDependencies": {
     "@types/big.js": "^6.1.3",
-    "tsc": "^2.0.3",
-    "tsc-alias": "^1.5.0",
+    "@types/ms": "^0.7.31",
+    "tsdx": "^0.14.1",
     "typescript": "^4.5.4"
   },
   "dependencies": {
+    "alchemy-sdk": "^2.8.3",
     "big.js": "^6.2.1",
     "decimal.js-light": "^2.5.1",
     "jsbi": "^4.1.0",
+    "ms": "^2.1.3",
     "multiformats": "^9.6.4",
-    "starknet": "^4.9.0",
+    "starknet": "^5.10.0",
     "tiny-invariant": "^1.2.0",
     "toformat": "^2.0.0",
     "typestub-ipfs-only-hash": "^4.0.0"

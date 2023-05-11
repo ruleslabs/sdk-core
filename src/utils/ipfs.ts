@@ -2,7 +2,7 @@ import { CID } from 'multiformats/cid'
 import * as Hash from 'typestub-ipfs-only-hash'
 
 import { Uint256 } from './uint256'
-import { CAIRO_FIELD_PRIME_CID } from '@/constants'
+import { CAIRO_FIELD_PRIME_CID } from '../constants'
 
 export interface Metadata {
   hash: Uint256

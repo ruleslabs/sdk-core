@@ -4,7 +4,7 @@ import _Decimal from 'decimal.js-light'
 import toFormat from 'toformat'
 import invariant from 'tiny-invariant'
 
-import { BigintIsh } from '../constants'
+import { BigintIsh } from '../types'
 
 const Decimal = toFormat(_Decimal)
 const Big = toFormat(_Big)
