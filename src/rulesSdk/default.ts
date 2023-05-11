@@ -46,11 +46,15 @@ export class RulesSdk implements RulesSdkInterface {
     })
 
     // starknet accounts
-    for (const rulesAccount of Object.keys(ACCOUNTS[networkName]) as RulesAccount[]) {
+    for (const rulesAccount of Object.keys(ACCOUNTS[this.networkInfos.starknetChainId]) as RulesAccount[]) {
       Object.defineProperty(this.starknetAccounts, rulesAccount, {
         enumerable: true,
         writable: false,
-        value: buildAccount(this.starknet, ACCOUNTS[networkName][rulesAccount], options.pks?.[rulesAccount]),
+        value: buildAccount(
+          this.starknet,
+          ACCOUNTS[this.networkInfos.starknetChainId][rulesAccount],
+          options.pks?.[rulesAccount]
+        ),
       })
     }
   }
