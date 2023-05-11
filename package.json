@@ -1,6 +1,6 @@
 {
   "name": "@rulesorg/sdk-core",
-  "version": "0.10.26",
+  "version": "1.0.0",
   "description": "An SDK to build applications on top of Rules",
   "scripts": {
     "build": "tsdx build",
