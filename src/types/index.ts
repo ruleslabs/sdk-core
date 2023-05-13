@@ -1,4 +1,3 @@
-import { Network } from 'alchemy-sdk'
 import JSBI from 'jsbi'
 
 import { EthereumChainId, RulesAccount, StarknetChainId } from '../constants'
@@ -7,7 +6,6 @@ export type SupportedChainId = EthereumChainId | StarknetChainId
 
 export interface NetworkInfos {
   starknetChainId: StarknetChainId
-  alchemyEthereumNetwork: Network
   ethereumChainId: EthereumChainId
   blockTime: number
   maxBlockSyncingPerExecution: number

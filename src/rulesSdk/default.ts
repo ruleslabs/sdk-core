@@ -1,5 +1,5 @@
+import { AlchemyProvider } from 'ethers'
 import { Account, ProviderInterface, SequencerProvider, constants } from 'starknet'
-import { Alchemy } from 'alchemy-sdk'
 
 import { NetworkInfos, RulesSdkOptions } from '../types'
 import { RulesSdkInterface } from './interface'
@@ -22,7 +22,7 @@ export class RulesSdk implements RulesSdkInterface {
 
   readonly starknetAccounts!: { [name in RulesAccount]: Account[] }
 
-  readonly alchemy!: Alchemy
+  readonly alchemyProvider!: AlchemyProvider
 
   readonly starknet: SequencerProvider
 
@@ -34,10 +34,7 @@ export class RulesSdk implements RulesSdkInterface {
 
     // alchemy
     if (options.alchemyApiKey) {
-      this.alchemy = new Alchemy({
-          apiKey: options.alchemyApiKey,
-          network: this.networkInfos.alchemyEthereumNetwork,
-      })
+      this.alchemyProvider = new AlchemyProvider(this.networkInfos.ethereumChainId, options.alchemyApiKey)
     }
 
     // built properties
