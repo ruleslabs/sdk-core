@@ -22,7 +22,7 @@ export class RulesSdk implements RulesSdkInterface {
 
   readonly starknetAccounts!: { [name in RulesAccount]: Account[] }
 
-  readonly alchemyProvider!: AlchemyProvider
+  readonly alchemyProvider?: AlchemyProvider
 
   readonly starknet: SequencerProvider
 

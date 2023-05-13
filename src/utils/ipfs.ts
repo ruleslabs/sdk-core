@@ -78,3 +78,5 @@ export async function findIpfsNonceForFeltMetadata(json: any): Promise<IpfsHashW
 
   return { ipfsHash, nonce: json.nonce }
 }
+
+export const ipfsToHttps = (url?: string): string | undefined => url?.replace(/^ipfs:\/\//, 'https://ipfs.io/ipfs/')
