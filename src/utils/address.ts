@@ -1,5 +1,5 @@
 import { getAddress } from 'ethers'
-import { getChecksumAddress } from 'starknet'
+import { encode, getChecksumAddress } from 'starknet'
 
 export function isEthereumAddress(address: string = '') {
   return address.match(/^0x[0-9a-fA-F]{40}$/)
@@ -10,8 +10,11 @@ export function isStarknetAddress(address: string = '') {
 }
 
 export function checksum(address: string = '') {
-  if (address.match(/^0x[0-9a-fA-F]{1,40}$/)) return getAddress(address)
-  else if (address.match(/^0x[0-9a-fA-F]{41,64}$/)) return getChecksumAddress(address)
+  if (address.match(/^0x[0-9a-fA-F]{1,40}$/)) {
+    return getAddress(encode.addHexPrefix(encode.removeHexPrefix(address).padStart(64, '0')))
+  } else if (address.match(/^0x[0-9a-fA-F]{41,64}$/)) {
+    return getChecksumAddress(address)
+  }
 
   throw 'Invalid address'
 }
