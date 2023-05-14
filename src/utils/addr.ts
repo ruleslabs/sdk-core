@@ -11,9 +11,9 @@ export function isStarknetAddress(address: string = '') {
 
 export function checksum(address: string = '') {
   if (address.match(/^0x[0-9a-fA-F]{1,40}$/)) {
-    return getAddress(encode.addHexPrefix(encode.removeHexPrefix(address).padStart(64, '0')))
+    return getAddress(encode.addHexPrefix(encode.removeHexPrefix(address).padStart(40, '0')))
   } else if (address.match(/^0x[0-9a-fA-F]{41,64}$/)) {
-    return getChecksumAddress(encode.addHexPrefix(encode.removeHexPrefix(address).padStart(40, '0')))
+    return getChecksumAddress(encode.addHexPrefix(encode.removeHexPrefix(address).padStart(64, '0')))
   }
 
   throw 'Invalid address'
