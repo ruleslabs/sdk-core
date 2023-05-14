@@ -1,4 +1,3 @@
-import { Network } from 'alchemy-sdk'
 import ms from 'ms'
 import { constants } from 'starknet'
 
@@ -24,14 +23,12 @@ export const DEFAULT_NETWORK_NAME = StarknetNetworkName.GOERLI
 export const SN_NETWORKS_INFOS: { [network in StarknetNetworkName]: NetworkInfos } = {
   [StarknetNetworkName. MAINNET]: {
     starknetChainId: StarknetChainId.MAINNET,
-    alchemyEthereumNetwork: Network.ETH_MAINNET,
     ethereumChainId: EthereumChainId.MAINNET,
     blockTime: ms('2.5m'),
     maxBlockSyncingPerExecution: 1,
   },
   [StarknetNetworkName.GOERLI]: {
     starknetChainId: StarknetChainId.GOERLI,
-    alchemyEthereumNetwork: Network.ETH_GOERLI,
     ethereumChainId: EthereumChainId.GOERLI,
     blockTime: ms('1m'),
     maxBlockSyncingPerExecution: 10,
