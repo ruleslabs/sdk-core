@@ -45,8 +45,8 @@ export interface FullBlock {
 }
 
 export class ExtendedSequencerProvider extends SequencerProvider {
-  public async getFullBlock(blockIdentifier: Parameters<typeof this.getBlock>[0]): Promise<FullBlock> {
-    return this.fetchEndpoint('get_block', { blockIdentifier: blockIdentifier! }) as FullBlock
+  public async getFullBlock(blockIdentifier: Parameters<ProviderInterface['getBlock']>[0]): Promise<FullBlock> {
+    return this.fetchEndpoint('get_block', { blockIdentifier }) as FullBlock
   }
 }
 
