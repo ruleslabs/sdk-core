@@ -3,6 +3,7 @@ import JSBI from 'jsbi'
 import { EthereumChainId, RulesAccount, StarknetChainId } from '../constants'
 
 export * from './events'
+export * from './api'
 
 export type SupportedChainId = EthereumChainId | StarknetChainId
 

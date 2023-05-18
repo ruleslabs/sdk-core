@@ -1,7 +1,7 @@
 import { AlchemyProvider } from 'ethers'
-import { Account, MessageToL1, ProviderInterface, SequencerProvider, Event, constants } from 'starknet'
+import { Account, ProviderInterface, SequencerProvider, constants } from 'starknet'
 
-import { NetworkInfos, RulesSdkOptions } from '../types'
+import { NetworkInfos, RulesSdkOptions, FullBlock } from '../types'
 import { RulesSdkInterface } from './interface'
 import { ACCOUNTS, RulesAccount, SN_NETWORKS_INFOS, StarknetNetworkName } from '../constants'
 
@@ -14,34 +14,6 @@ export function buildAccount(
   pks = Array.isArray(pks) ? pks : [pks]
 
   return addresses.map((address, index) => new Account(provider, address, pks[index] ?? ''))
-}
-
-export interface FullMessageToL1 extends MessageToL1 {
-  from_address: string
-}
-
-export interface TransactionReceipt {
-  events?: Array<Event>
-  l2_to_l1_messages?: Array<FullMessageToL1>
-  transaction_hash?: string
-  actual_fee?: string
-  transaction_index?: number
-}
-
-export interface Transaction {
-  sender_address?: string
-  transaction_hash?: string
-}
-
-export interface FullBlock {
-  status?: string
-  transaction_receipts?: Array<TransactionReceipt>
-  block_number?: number
-  parent_block_hash?: string
-  block_hash?: string
-  transactions?: Array<Transaction>
-  gas_price?: string
-  timestamp?: number
 }
 
 export class ExtendedSequencerProvider extends SequencerProvider {
