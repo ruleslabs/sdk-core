@@ -1,7 +1,4 @@
-export interface Uint256 {
-  low: string
-  high: string
-}
+import { Uint256 } from '../types'
 
 function asciiToHex(str: string): string {
   return str.split('').map((c) => c[0].charCodeAt(0).toString(16)).join('')

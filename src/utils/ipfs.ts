@@ -1,18 +1,8 @@
 import { CID } from 'multiformats/cid'
 import * as Hash from 'typestub-ipfs-only-hash'
 
-import { Uint256 } from './uint256'
 import { CAIRO_FIELD_PRIME_CID } from '../constants'
-
-export interface Metadata {
-  hash: Uint256
-  multihashIdentifier: number
-}
-
-export interface FeltMetadata {
-  hash: string
-  multihashIdentifier: number
-}
+import { FeltMetadata, IpfsHashWithNonce, Metadata, Uint256 } from '../types'
 
 function buf2hex(buffer: Uint8Array) {
   return [...new Uint8Array(buffer)]
@@ -61,11 +51,6 @@ export function isIpfsCidValid(ipfsCid: string): boolean {
   }
 
   return false
-}
-
-export interface IpfsHashWithNonce {
-  ipfsHash: string
-  nonce: number
 }
 
 export async function findIpfsNonceForFeltMetadata(json: any): Promise<IpfsHashWithNonce> {

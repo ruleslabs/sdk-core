@@ -2,6 +2,7 @@ export * from './addresses'
 export * from './networks'
 
 import JSBI from 'jsbi'
+import { hash } from 'starknet'
 
 export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
 
@@ -80,3 +81,32 @@ export const C_SCORE_GLOBAL_MULTIPLICATOR = 1_000
 // IPFS
 
 export const CAIRO_FIELD_PRIME_CID = 'QmNssyH6oBvgZBcS7pB8v7hUbBx2ntxfd5NdBY6kyFtHje' // 0x1220 - CAIRO_FIELD_PRIME
+
+// EVENTS
+
+export const EventKeys = {
+  TRANSFER_SINGLE: hash.getSelectorFromName('TransferSingle'),
+  TRANSFER_BATCH: hash.getSelectorFromName('TransferBatch'),
+
+  ACCOUNT_INITIALIZED: hash.getSelectorFromName('AccountInitialized'),
+  ACCOUNT_UPGRADED: hash.getSelectorFromName('AccountUpgraded'),
+
+  SIGNER_ESCAPE_TRIGGERED: hash.getSelectorFromName('SignerEscapeTriggered'),
+  SIGNER_ESCAPED: hash.getSelectorFromName('SignerEscaped'),
+  SIGNER_PUBLIC_KEY_CHANGED: hash.getSelectorFromName('SignerPublicKeyChanged'),
+
+  OFFER_CREATED: hash.getSelectorFromName('OfferCreated'),
+  OFFER_CANCELED: hash.getSelectorFromName('OfferCanceled'),
+  OFFER_ACCEPTED: hash.getSelectorFromName('OfferAccepted'),
+
+  APPROVAL: hash.getSelectorFromName('Approval'),
+  APPROVAL_FOR_ALL: hash.getSelectorFromName('ApprovalForAll'),
+
+  TRANSFER: hash.getSelectorFromName('Transfer'),
+}
+
+export const MessageContext = {
+  STARKGATE: 'starkgate',
+}
+
+export const WITHDRAW_MESSAGE = '0x0'
