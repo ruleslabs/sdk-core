@@ -6730,9 +6730,9 @@ stack-utils@^1.0.1:
     escape-string-regexp "^2.0.0"
 
 starknet@^5.10.0:
-  version "5.10.0"
-  resolved "https://registry.yarnpkg.com/starknet/-/starknet-5.10.0.tgz#e76dbd802b962b6daf7f5452795e3e332a50c56a"
-  integrity sha512-yN8mjUKI4nK4+SXdqXXL9H+6CRUWLmw2zCBrNgokwL19dXzim63eqwEBJdZZcSaE2GzAe4J9PqLPm4ri8Ews+Q==
+  version "5.10.2"
+  resolved "https://registry.yarnpkg.com/starknet/-/starknet-5.10.2.tgz#2bd8adce94fabba6f505c1624279ba6fafc202c9"
+  integrity sha512-KdZI6srNXrjicTj7+xwLasIchjXumfr5o28HFv4+7AtjyDtzzwzN7SrVQI936nylwl4hPywn38E0CDkKJGH1bg==
   dependencies:
     "@noble/curves" "^0.8.2"
     isomorphic-fetch "^3.0.0"
