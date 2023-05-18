@@ -1,5 +1,5 @@
 import { AlchemyProvider } from 'ethers'
-import { Account, ProviderInterface, SequencerProvider, constants } from 'starknet'
+import { Account, MessageToL1, ProviderInterface, SequencerProvider, Event, constants } from 'starknet'
 
 import { NetworkInfos, RulesSdkOptions } from '../types'
 import { RulesSdkInterface } from './interface'
@@ -16,6 +16,40 @@ export function buildAccount(
   return addresses.map((address, index) => new Account(provider, address, pks[index] ?? ''))
 }
 
+export interface FullMessageToL1 extends MessageToL1 {
+  from_address: string
+}
+
+export interface TransactionReceipt {
+  events?: Array<Event>
+  l2_to_l1_messages?: Array<FullMessageToL1>
+  transaction_hash?: string
+  actual_fee?: string
+  transaction_index?: number
+}
+
+export interface Transaction {
+  sender_address?: string
+  transaction_hash?: string
+}
+
+export interface FullBlock {
+  status?: string
+  transaction_receipts?: Array<TransactionReceipt>
+  block_number?: number
+  parent_block_hash?: string
+  block_hash?: string
+  transactions?: Array<Transaction>
+  gas_price?: string
+  timestamp?: number
+}
+
+export class ExtendedSequencerProvider extends SequencerProvider {
+  public async getFullBlock(blockIdentifier: Parameters<typeof this.getBlock>[0]): Promise<FullBlock> {
+    return this.fetchEndpoint('get_block', { blockIdentifier: blockIdentifier! }) as FullBlock
+  }
+}
+
 export class RulesSdk implements RulesSdkInterface {
 
   readonly networkInfos: NetworkInfos
@@ -24,13 +58,13 @@ export class RulesSdk implements RulesSdkInterface {
 
   readonly alchemyProvider?: AlchemyProvider
 
-  readonly starknet: SequencerProvider
+  readonly starknet: ExtendedSequencerProvider
 
   constructor(networkName: StarknetNetworkName, options: RulesSdkOptions = {}) {
     this.networkInfos = SN_NETWORKS_INFOS[networkName]
 
     // starknet provider
-    this.starknet = new SequencerProvider({ network: networkName as any as constants.NetworkName })
+    this.starknet = new ExtendedSequencerProvider({ network: networkName as any as constants.NetworkName })
 
     // alchemy
     if (options.alchemyApiKey) {
