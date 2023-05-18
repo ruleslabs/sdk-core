@@ -17,6 +17,10 @@ export function buildAccount(
 }
 
 export class ExtendedSequencerProvider extends SequencerProvider {
+  constructor(optionsOrProvider: ConstructorParameters<typeof SequencerProvider>[0]) {
+    super(optionsOrProvider)
+  }
+
   public async getFullBlock(blockIdentifier: Parameters<ProviderInterface['getBlock']>[0]): Promise<FullBlock> {
     return this.fetchEndpoint('get_block', { blockIdentifier }) as FullBlock
   }
