@@ -16,20 +16,14 @@ const constructSameEthereumAddressMap = (address: string): AddressMap =>
 const constructSameStarknetAddressMap = (address: string): AddressMap =>
   constructSameAddressMap(address, Object.values(StarknetChainId) as StarknetChainId[])
 
-// ethereum addresses
-const ETHERUM_KASS_ADDRESSES = '0xdead'
-
-// starknet addresses
-const STARKNET_KASS_ADDRESSES = '0xdead'
-
 /* Kass contract Addresses */
 export const KASS_ADDRESSES: AddressMap = {
-  ...constructSameEthereumAddressMap(ETHERUM_KASS_ADDRESSES),
-  ...constructSameStarknetAddressMap(STARKNET_KASS_ADDRESSES),
+  ...constructSameEthereumAddressMap('0xdead'),
+  ...constructSameStarknetAddressMap('0xdead'),
 }
 
 /* Rules */
-export const RULES_ADDRESSES: AddressMap = {
+export const RULES_ADDRESSES = {
   [StarknetChainId.GOERLI]: '0x15d9449ac58c7cfdd9db67acaf99168a97949c424453019439ec49e96b3b571',
   [StarknetChainId.MAINNET]: '0x46bfa580e4fa55a38eaa7f51a3469f86b336eed59a6136a07b7adcd095b0eb2',
 }
@@ -47,14 +41,18 @@ export const MARKETPLACE_ADDRESSES: AddressMap = {
 }
 
 /* Starkgate contract addresses */
-export const L1_STARKGATE_ADDRESSES: AddressMap = {
+export const STARKGATE_ADDRESSES: AddressMap = {
   [EthereumChainId.GOERLI]: '0xc3511006C04EF1d78af4C8E0e74Ec18A6E64Ff9e',
   [EthereumChainId.MAINNET]: '0xae0Ee0A63A2cE6BaeEFFE56e7714FB4EFE48D419',
+  ...constructSameStarknetAddressMap('0x73314940630fd6dcda0d772d4c972c4e0a9946bef9dabf4ef84eda8ef542b82'),
 }
 
-export const L2_STARKGATE_ADDRESSES: AddressMap = {
-  [StarknetChainId.GOERLI]: '0x73314940630fd6dcda0d772d4c972c4e0a9946bef9dabf4ef84eda8ef542b82',
-  [StarknetChainId.MAINNET]: '0x73314940630fd6dcda0d772d4c972c4e0a9946bef9dabf4ef84eda8ef542b82',
+/* Multicall */
+export const MULTICALL_ADDRESSES: AddressMap = {
+  [StarknetChainId.GOERLI]: '0x042a12c5a641619a6c58e623d5735273cdfb0e13df72c4bacb4e188892034bd6',
+  [StarknetChainId.MAINNET]: '0x0740a7a14618bb7e4688d10059bc42104d22c315bb647130630c77d3b6d3ee50',
+  [EthereumChainId.GOERLI]: '0x77dca2c955b15e9de4dbbcf1246b4b85b651e50e',
+  [EthereumChainId.MAINNET]: '0xeefba1e63905ef1d7acba5a8513c70307c1ce441',
 }
 
 /* UCD */
