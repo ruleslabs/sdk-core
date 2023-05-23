@@ -79,6 +79,10 @@ export class Fraction {
 
   // cmp
 
+  public isNull() {
+    return JSBI.equal(this.numerator, JSBI.BigInt(0))
+  }
+
   public lessThan(other: Fraction | BigintIsh): boolean {
     const otherParsed = Fraction.tryParseFraction(other)
     return JSBI.lessThan(

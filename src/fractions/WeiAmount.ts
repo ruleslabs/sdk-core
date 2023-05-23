@@ -20,6 +20,7 @@ export enum Unit {
 const decimalScaleForDecimals = (decimals: number) => JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(decimals))
 
 export class WeiAmount extends Fraction {
+  public static readonly ZERO = WeiAmount.fromRawAmount(0)
   public static readonly decimals = Unit.ETHER
 
   public readonly decimalScale = decimalScaleForDecimals(WeiAmount.decimals)
