@@ -3,7 +3,7 @@ import { Account, ProviderInterface, SequencerProvider, constants } from 'starkn
 
 import { NetworkInfos, RulesSdkOptions, FullBlock } from '../types'
 import { RulesSdkInterface } from './interface'
-import { ACCOUNTS, RulesAccount, SN_NETWORKS_INFOS, StarknetNetworkName } from '../constants'
+import { ACCOUNTS, DUMMY_PK, RulesAccount, SN_NETWORKS_INFOS, StarknetNetworkName } from '../constants'
 
 export function buildAccount(
   provider: ProviderInterface,
@@ -13,7 +13,7 @@ export function buildAccount(
   addresses = Array.isArray(addresses) ? addresses : [addresses]
   pks = Array.isArray(pks) ? pks : [pks]
 
-  return addresses.map((address, index) => new Account(provider, address, pks[index] ?? ''))
+  return addresses.map((address, index) => new Account(provider, address, pks[index] ?? DUMMY_PK))
 }
 
 export class ExtendedSequencerProvider extends SequencerProvider {

@@ -110,3 +110,7 @@ export const MessageContext = {
 }
 
 export const WITHDRAW_MESSAGE = '0x0'
+
+// PKS
+
+export const DUMMY_PK = '0xB00B135'
