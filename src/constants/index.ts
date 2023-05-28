@@ -105,10 +105,6 @@ export const EventKeys = {
   TRANSFER: hash.getSelectorFromName('Transfer'),
 }
 
-export const MessageContext = {
-  STARKGATE: 'starkgate',
-}
-
 export const WITHDRAW_MESSAGE = '0x0'
 
 // PKS

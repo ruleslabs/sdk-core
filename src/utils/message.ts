@@ -1,10 +1,10 @@
-import { MessageContext, WITHDRAW_MESSAGE } from '../constants'
-import { ParsedMessage } from '../types'
+import { WITHDRAW_MESSAGE } from '../constants'
+import { MessageContext, ParsedMessage } from '../types'
 import { uint256HexToStrHex } from './uint256'
 
-export function parseMessage(context: string, payload: string[]): ParsedMessage | null {
+export function parseMessage(context: MessageContext, payload: string[]): ParsedMessage | null {
   switch (context) {
-    case MessageContext.STARKGATE:
+    case 'starkgate':
       if (payload[0] !== WITHDRAW_MESSAGE) return null
 
       return {
