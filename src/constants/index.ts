@@ -4,9 +4,10 @@ export * from './networks'
 import JSBI from 'jsbi'
 import { hash } from 'starknet'
 
-import { ScarcityName } from '../types'
-
 export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+
+const ALL_SCARCITIES = ['common', 'platinium', 'halloween'] as const
+export type ScarcityName = (typeof ALL_SCARCITIES)[number]
 
 export const Seasons: {
   [key: number]: Array<{
