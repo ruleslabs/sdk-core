@@ -47,3 +47,5 @@ export interface Uint256 {
   low: string
   high: string
 }
+
+export type ScarcityName = 'common' | 'platinium' | 'halloween'

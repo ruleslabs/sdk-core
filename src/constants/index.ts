@@ -4,40 +4,36 @@ export * from './networks'
 import JSBI from 'jsbi'
 import { hash } from 'starknet'
 
+import { ScarcityName } from '../types'
+
 export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
 
-export const ScarcityName = ['Common', 'Platinium', 'Halloween']
-
 export const Seasons: {
-  [key: number]: {
-    name: string,
-    scarcities: {
-      [key: number]: {
-        maxSupply?: number
-        maxLowSerial: number
-        cScoreCoeff?: number
-      }
-    }
-  }
+  [key: number]: Array<{
+    name: ScarcityName,
+    maxSupply?: number
+    maxLowSerial: number
+    cScoreCoeff?: number
+  }>
 } = {
-  [1]: {
-    name: "Season 1",
-    scarcities: {
-      [0]: {
-        maxLowSerial: 100,
-      },
-      [1]: {
-        maxSupply: 350,
-        maxLowSerial: 20,
-        cScoreCoeff: 10,
-      },
-      [2]: {
-        maxSupply: 2175,
-        maxLowSerial: 100,
-        cScoreCoeff: 2.5,
-      },
+  [1]: [
+    {
+      name: 'common',
+      maxLowSerial: 100,
     },
-  },
+    {
+      name: 'platinium',
+      maxSupply: 350,
+      maxLowSerial: 20,
+      cScoreCoeff: 10,
+    },
+    {
+      name: 'halloween',
+      maxSupply: 2175,
+      maxLowSerial: 100,
+      cScoreCoeff: 2.5,
+    },
+  ],
 }
 
 // Signer escape
