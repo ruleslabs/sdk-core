@@ -6,8 +6,11 @@ import { hash } from 'starknet'
 
 export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
 
-const ALL_SCARCITIES = ['common', 'platinium', 'halloween'] as const
-export type ScarcityName = (typeof ALL_SCARCITIES)[number]
+export enum ScarcityName {
+  COMMON = 'common',
+  PLATINIUM = 'platinium',
+  HALLOWEEN = 'halloween',
+}
 
 export const Seasons: {
   [key: number]: Array<{
@@ -19,17 +22,17 @@ export const Seasons: {
 } = {
   [1]: [
     {
-      name: 'common',
+      name: ScarcityName.COMMON,
       maxLowSerial: 100,
     },
     {
-      name: 'platinium',
+      name: ScarcityName.PLATINIUM,
       maxSupply: 350,
       maxLowSerial: 20,
       cScoreCoeff: 10,
     },
     {
-      name: 'halloween',
+      name: ScarcityName.HALLOWEEN,
       maxSupply: 2175,
       maxLowSerial: 100,
       cScoreCoeff: 2.5,
