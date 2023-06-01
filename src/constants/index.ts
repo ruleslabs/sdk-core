@@ -110,3 +110,7 @@ export const WITHDRAW_MESSAGE = '0x0'
 // PKS
 
 export const DUMMY_PK = '0xB00B135'
+
+// Class hashes
+
+export const ACCOUNT_CLASS_HASH = '0x033aab848c5630b4718529014666c263c8c38dd0ede430ced9fd19c805525652'

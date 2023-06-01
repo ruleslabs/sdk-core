@@ -106,7 +106,3 @@ export const ACCOUNTS: AccountMaps = {
     [RulesAccount.LIVE_REWARDS_MINTER]: '0xdead',
   },
 }
-
-// Class hashes
-
-export const ACCOUNT_CLASS_HASH = '0x201f12e0f060c7a7a447aa42ce2c60f8a737b2233cebb075f01a05839fdc00e'
