@@ -109,5 +109,4 @@ export const ACCOUNTS: AccountMaps = {
 
 // Class hashes
 
-export const ACCOUNT_CLASS_HASH = '0x6d706cfbac9b8262d601c38251c5fbe0497c3a96cc91a92b08d91b61d9e70c4'
-export const PROXY_CLASS_HASH = '0x1ffa341ccd458abc28b46d41d09bcdf69fc7e351a7cef42e63975ca997e6a58'
+export const ACCOUNT_CLASS_HASH = '0x0238cd40ddfe364604a46f1eaee95f2e2df069510d3a80979a879a05329ef8d0'
