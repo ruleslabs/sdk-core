@@ -109,4 +109,4 @@ export const ACCOUNTS: AccountMaps = {
 
 // Class hashes
 
-export const ACCOUNT_CLASS_HASH = '0x0238cd40ddfe364604a46f1eaee95f2e2df069510d3a80979a879a05329ef8d0'
+export const ACCOUNT_CLASS_HASH = '0x201f12e0f060c7a7a447aa42ce2c60f8a737b2233cebb075f01a05839fdc00e'
