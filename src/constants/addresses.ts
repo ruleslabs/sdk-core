@@ -23,8 +23,8 @@ export const KASS_ADDRESSES: AddressMap = {
 }
 
 /* Rules */
-export const RULES_ADDRESSES = {
-  [StarknetChainId.GOERLI]: '0x15d9449ac58c7cfdd9db67acaf99168a97949c424453019439ec49e96b3b571',
+export const RULES_TOKENS_ADDRESSES = {
+  [StarknetChainId.GOERLI]: '0x527578cdacc24145f565569267d0b04d601e97615140dcb0777f188af648215',
   [StarknetChainId.MAINNET]: '0x46bfa580e4fa55a38eaa7f51a3469f86b336eed59a6136a07b7adcd095b0eb2',
 }
 
