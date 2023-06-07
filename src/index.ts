@@ -5,7 +5,7 @@ export * from './types'
 
 // UTILS
 export * as constants from './constants'
-export * as cardId from './utils/cardId'
+export * as token from './utils/tokens'
 export * as evt from './utils/event'
 export * as ipfs from './utils/ipfs'
 export * as msg from './utils/message'
