@@ -1,10 +1,7 @@
-import { encode, hash, uint256 } from 'starknet'
+import { hash, uint256 } from 'starknet'
 
 import { Uint256 } from '../types'
-
-function encodeShortString(str: string): string {
-  return encode.addHexPrefix(str.split('').map(c => Number(c.charCodeAt(0)).toString(16)).join(''))
-}
+import { encodeShortString } from './encode'
 
 interface CardModel {
   artistName: string
