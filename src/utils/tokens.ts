@@ -1,6 +1,10 @@
-import { hash, shortString, uint256 } from 'starknet'
+import { hash, uint256 } from 'starknet'
 
 import { Uint256 } from '../types'
+
+function encodeShortString(str: string): string {
+  return str.split('').map(c => Number(c.charCodeAt(0)).toString(16)).join('')
+}
 
 interface CardModel {
   artistName: string
@@ -20,7 +24,7 @@ export function getCardTokenId({ artistName, season, scarcity, serialNumber }: C
 }
 
 export function getCardModelId({ artistName, season, scarcity }: CardModel) {
-  const fullId = hash.computeHashOnElements([shortString.encodeShortString(artistName), season, scarcity])
+  const fullId = hash.computeHashOnElements([encodeShortString(artistName), season, scarcity])
 
   return uint256.bnToUint256(fullId).low
 }
