@@ -6,22 +6,22 @@ import { encodeShortString } from './encode'
 interface CardModel {
   artistName: string
   season: number
-  scarcity: number
+  scarcityId: number
 }
 
 interface Card extends CardModel {
   serialNumber: number
 }
 
-export function getCardTokenId({ artistName, season, scarcity, serialNumber }: Card): Uint256 {
+export function getCardTokenId({ artistName, season, scarcityId, serialNumber }: Card): Uint256 {
   return {
-    low: getCardModelId({ artistName, season, scarcity }).toString(),
+    low: getCardModelId({ artistName, season, scarcityId }).toString(),
     high: `${serialNumber}`,
   }
 }
 
-export function getCardModelId({ artistName, season, scarcity }: CardModel) {
-  const fullId = hash.computeHashOnElements([encodeShortString(artistName), season, scarcity])
+export function getCardModelId({ artistName, season, scarcityId }: CardModel) {
+  const fullId = hash.computeHashOnElements([encodeShortString(artistName), season, scarcityId])
 
   return uint256.bnToUint256(fullId).low
 }

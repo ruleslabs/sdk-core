@@ -1,7 +1,7 @@
-import { uint256HexToStrHex } from './uint256'
+import { encode } from '..'
 import { EventKeys } from '../constants'
 import { ParsedEvent, TransferSingleEvent } from '../types'
-import { num, uint256 } from 'starknet'
+import { uint256 } from 'starknet'
 
 const nullAddressFilter = (addresses: string[]): string[] => addresses.filter((address) => address !== '0x0')
 
@@ -14,7 +14,7 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           operator: data[0],
           from: data[1],
           to: data[2],
-          tokenId: num.toHex(uint256.uint256ToBN({ low: data[3], high: data[4] })),
+          tokenId: encode.encodeUint256({ low: data[3], high: data[4] }),
           amount: uint256.uint256ToBN({ low: data[5], high: data[6] }),
           type: Number(data[3]) * Number(data[4]) ? 'card' : 'pack', // if low and high are both != 0, it's a card
         } as TransferSingleEvent,
@@ -48,7 +48,7 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
       return [
         {
           key: EventKeys.OFFER_CREATED,
-          tokenId: uint256HexToStrHex({ low: data[0], high: data[1] }),
+          tokenId: encode.encodeUint256({ low: data[0], high: data[1] }),
           seller: data[2],
           price: data[3],
         },
@@ -59,7 +59,7 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
       return [
         {
           key: EventKeys.OFFER_CANCELED,
-          tokenId: uint256HexToStrHex({ low: data[0], high: data[1] }),
+          tokenId: encode.encodeUint256({ low: data[0], high: data[1] }),
         },
         [],
       ]
@@ -68,7 +68,7 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
       return [
         {
           key: EventKeys.OFFER_ACCEPTED,
-          tokenId: uint256HexToStrHex({ low: data[0], high: data[1] }),
+          tokenId: encode.encodeUint256({ low: data[0], high: data[1] }),
           buyer: data[2],
         },
         nullAddressFilter([data[2]]),
@@ -91,7 +91,7 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           key: EventKeys.TRANSFER,
           from: data[0],
           to: data[1],
-          value: uint256HexToStrHex({ low: data[2], high: data[3] }),
+          value: encode.encodeUint256({ low: data[2], high: data[3] }),
           type: 'eth',
         },
         nullAddressFilter([data[0], data[1]]),
