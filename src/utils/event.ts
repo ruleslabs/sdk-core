@@ -1,6 +1,7 @@
 import { uint256HexToStrHex } from './uint256'
 import { EventKeys } from '../constants'
 import { ParsedEvent, TransferSingleEvent } from '../types'
+import { num, uint256 } from 'starknet'
 
 const nullAddressFilter = (addresses: string[]): string[] => addresses.filter((address) => address !== '0x0')
 
@@ -13,10 +14,10 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           operator: data[0],
           from: data[1],
           to: data[2],
-          tokenId: uint256HexToStrHex({ low: data[3], high: data[4] }),
-          amount: Number(uint256HexToStrHex({ low: data[5], high: data[6] })),
+          tokenId: num.toHex(uint256.uint256ToBN({ low: data[3], high: data[4] })),
+          amount: uint256.uint256ToBN({ low: data[5], high: data[6] }),
           type: Number(data[3]) * Number(data[4]) ? 'card' : 'pack', // if low and high are both != 0, it's a card
-        },
+        } as TransferSingleEvent,
         nullAddressFilter([data[0], data[1], data[2]]),
       ]
 
@@ -71,19 +72,6 @@ export function parseEvent(key: string, data: string[]): [ParsedEvent, string[]]
           buyer: data[2],
         },
         nullAddressFilter([data[2]]),
-      ]
-
-    case EventKeys.APPROVAL:
-      return [
-        {
-          key: EventKeys.APPROVAL,
-          owner: data[0],
-          operator: data[1],
-          tokenId: uint256HexToStrHex({ low: data[2], high: data[3] }),
-          amount: Number(uint256HexToStrHex({ low: data[4], high: data[5] })),
-          type: Number(data[2]) * Number(data[3]) ? 'card' : 'pack', // if low and high are both != 0, it's a card
-        },
-        nullAddressFilter([data[0], data[1]]),
       ]
 
     case EventKeys.APPROVAL_FOR_ALL:

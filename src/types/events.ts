@@ -14,7 +14,7 @@ export interface ApprovalEvent extends EventBase {
   owner: string
   operator: string
   tokenId: string
-  amount: number
+  amount: bigint
   type: 'pack' | 'card'
 }
 
@@ -42,7 +42,7 @@ export interface TransferSingleEvent extends EventBase {
   from: string
   to: string
   tokenId: string
-  amount: number
+  amount: bigint
   type: 'pack' | 'card'
 }
 

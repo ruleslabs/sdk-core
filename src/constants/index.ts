@@ -99,7 +99,6 @@ export const EventKeys = {
   OFFER_CANCELED: hash.getSelectorFromName('OfferCanceled'),
   OFFER_ACCEPTED: hash.getSelectorFromName('OfferAccepted'),
 
-  APPROVAL: hash.getSelectorFromName('Approval'),
   APPROVAL_FOR_ALL: hash.getSelectorFromName('ApprovalForAll'),
 
   TRANSFER: hash.getSelectorFromName('Transfer'),
