@@ -13,7 +13,7 @@ export function buildAccount(
   addresses = Array.isArray(addresses) ? addresses : [addresses]
   pks = Array.isArray(pks) ? pks : [pks]
 
-  return addresses.map((address, index) => new Account(provider, address, pks[index] ?? DUMMY_PK))
+  return addresses.map((address, index) => new Account(provider, address, pks[index] ?? DUMMY_PK, '1'))
 }
 
 export class ExtendedSequencerProvider extends SequencerProvider {
