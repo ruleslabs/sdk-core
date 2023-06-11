@@ -25,7 +25,7 @@ export const KASS_ADDRESSES: AddressMap = {
 /* Rules */
 export const RULES_TOKENS_ADDRESSES = {
   [StarknetChainId.GOERLI]: '0x5f5c553e2bfb3ac1cd11a286fb6bc1deb286b97b17f9d61a1793c1d956827c4',
-  [StarknetChainId.MAINNET]: '0x46bfa580e4fa55a38eaa7f51a3469f86b336eed59a6136a07b7adcd095b0eb2',
+  [StarknetChainId.MAINNET]: '0x5b456031650c1de9eec123d3e7d06a684d321a346d4a7cac9fd86c2b77cf70f',
 }
 
 /* Starknet ETH */
@@ -74,7 +74,7 @@ export enum RulesAccount {
 
 export const ACCOUNTS: AccountMaps = {
   [StarknetChainId.MAINNET]: {
-    [RulesAccount.VOUCHER_SIGNER]: '0xdead',
+    [RulesAccount.VOUCHER_SIGNER]: '0x4b5cab01f7e6e59df39c14a3f3436c721554f719e42618fd4e69e4a605d39ef',
   },
   [StarknetChainId.GOERLI]: {
     [RulesAccount.VOUCHER_SIGNER]: '0x666cd8bd54848d52fac2bba6391a5b6abed75ddad2c113c1746ffa9fd541d8b',
