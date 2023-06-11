@@ -113,4 +113,4 @@ export const DUMMY_PK = '0xB00B135'
 // Class hashes
 
 export const ACCOUNT_CLASS_HASH = '0x1c644efdf255bffbac0bc7915e969edac4c0bcae5f162dc47382c2fd4fff4ab'
-export const RULES_TOKENS_CLASS_HASH = '0x48e09e58a43b0794821ac868ed3c2d940a2ff13a2a7edc57dea999cf881e439'
+export const RULES_TOKENS_CLASS_HASH = '0x1dd0eb0e20cb4736dc868126b612c472ed8d2d70e038f6d6d85df2d9d022051'
