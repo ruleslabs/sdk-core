@@ -73,6 +73,7 @@ export enum StarknetWalletLockingReason {
   SIGNER_ESCAPE = 'signerEscape',
   FORCED_UPGRADE = 'forcedUpgrade',
   MAINTENANCE = 'maintenance',
+  UNDEPLOYED = 'undeployed',
 }
 
 // C-Score
