@@ -70,10 +70,10 @@ export enum StarknetTransactionAction {
 // wallet lock
 
 export enum StarknetWalletLockingReason {
-  SIGNER_ESCAPE = 'signerEscape',
-  FORCED_UPGRADE = 'forcedUpgrade',
-  MAINTENANCE = 'maintenance',
-  UNDEPLOYED = 'undeployed',
+  SIGNER_ESCAPE,
+  FORCED_UPGRADE,
+  MAINTENANCE,
+  UNDEPLOYED,
 }
 
 // C-Score
