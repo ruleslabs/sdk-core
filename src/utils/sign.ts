@@ -14,7 +14,7 @@ export function signHash(hash: string, pk: string) {
   return formatSignature(ec.starkCurve.sign(hash, pk))
 }
 
-export function formatSignature(signature: StarknetSignature) {
+export function formatSignature(signature: StarknetSignature): Signature {
   return Array.isArray(signature)
     ? {
       r: signature[0],

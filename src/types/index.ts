@@ -1,7 +1,6 @@
 import JSBI from 'jsbi'
 
 import { EthereumChainId, RulesAccount, StarknetChainId } from '../constants'
-import { num } from 'starknet'
 
 export * from './events'
 export * from './messages'
@@ -52,6 +51,6 @@ export interface Uint256 {
 export type ScarcityName = 'common' | 'platinium' | 'halloween'
 
 export interface Signature {
-  r: num.BigNumberish,
-  s: num.BigNumberish,
+  r: string
+  s: string,
 }
