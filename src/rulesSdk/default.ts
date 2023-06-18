@@ -1,19 +1,21 @@
 import { AlchemyProvider } from 'ethers'
 import { Account, ProviderInterface, SequencerProvider, constants, stark, typedData, uint256 } from 'starknet'
 
-import { NetworkInfos, RulesSdkOptions, FullBlock } from '../types'
+import { NetworkInfos, RulesSdkOptions, FullBlock, Uint256, Signature } from '../types'
 import { RulesSdkInterface } from './interface'
 import {
   ACCOUNTS,
   DUMMY_PK,
   ETH_ADDRESSES,
   ItemType,
+  MARKETPLACE_ADDRESSES,
   RULES_TOKENS_ADDRESSES,
   RulesAccount,
   SN_NETWORKS_INFOS,
   StarknetNetworkName,
 } from '../constants'
 import { formatSignature } from '../utils/sign'
+import { getListingOrderCalldata, getSignatureCalldata, getVoucherCalldata } from '../utils/calldata'
 
 export function buildAccount(
   provider: ProviderInterface,
@@ -167,5 +169,83 @@ export class RulesSdk implements RulesSdkInterface {
     }
 
     return typedData.getMessageHash(data, offerer)
+  }
+
+  /**
+   * Calls
+   */
+
+  public getVoucherRedeemCall(
+    receiver: string,
+    tokenId: Uint256 | string,
+    amount: number,
+    salt: string,
+    signature: Signature
+  ) {
+    return {
+      contractAddress: RULES_TOKENS_ADDRESSES[this.networkInfos.starknetChainId],
+      entrypoint: 'redeem_voucher',
+      calldata: [
+        ...getVoucherCalldata(receiver, tokenId, amount, salt),
+        ...getSignatureCalldata(signature),
+      ],
+    }
+  }
+
+  public getOrderCancelationCall(
+    tokenId: Uint256 | string,
+    amount: number,
+    price: string,
+    salt: string,
+    signature: Signature
+  ) {
+    return {
+      contractAddress: MARKETPLACE_ADDRESSES[this.networkInfos.starknetChainId],
+      entrypoint: 'cancel_order',
+      calldata: [
+        ...getListingOrderCalldata(this.networkInfos.starknetChainId, tokenId, amount, price, salt),
+        ...getSignatureCalldata(signature),
+      ],
+    }
+  }
+
+  public getOrderFulfillCall(
+    offerer: string,
+    tokenId: Uint256 | string,
+    amount: number,
+    price: string,
+    salt: string,
+    signature: Signature
+  ) {
+    return {
+      contractAddress: MARKETPLACE_ADDRESSES[this.networkInfos.starknetChainId],
+      entrypoint: 'fulfill_order',
+      calldata: [
+        { offerer },
+        ...getListingOrderCalldata(this.networkInfos.starknetChainId, tokenId, amount, price, salt),
+        ...getSignatureCalldata(signature),
+      ],
+    }
+  }
+
+  public getVoucherReedemAndOrderFulfillCall(
+    offerer: string,
+    tokenId: Uint256 | string,
+    amount: number,
+    price: string,
+    salt: string,
+    signature: Signature
+  ) {
+    return {
+      contractAddress: MARKETPLACE_ADDRESSES[this.networkInfos.starknetChainId],
+      entrypoint: 'redeem_voucher_and_fulfill_order',
+      calldata: [
+        ...getVoucherCalldata(offerer, tokenId, amount, salt),
+        ...getSignatureCalldata(signature),
+
+        ...getListingOrderCalldata(this.networkInfos.starknetChainId, tokenId, amount, price, salt),
+        ...getSignatureCalldata(signature),
+      ],
+    }
   }
 }
