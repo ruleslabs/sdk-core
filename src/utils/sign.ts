@@ -18,7 +18,7 @@ export function formatSignature(signature: StarknetSignature): Signature {
   return Array.isArray(signature)
     ? {
       r: signature[0],
-      s: signature[0],
+      s: signature[1],
     }
     : {
       r: signature.r.toString(),
