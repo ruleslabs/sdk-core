@@ -1,4 +1,4 @@
-import { Signature as StarknetSignature, ec, num } from 'starknet'
+import { Signature as StarknetSignature, ec, encode, num } from 'starknet'
 
 import { Signature } from '../types'
 
@@ -24,4 +24,8 @@ export function formatSignature(signature: StarknetSignature): Signature {
       r: signature.r.toString(),
       s: signature.s.toString(),
     }
+}
+
+export function isFullPublicKeyValid(fullPublicKey: string, publicKey: string) {
+  return BigInt(publicKey) == BigInt(encode.addHexPrefix(fullPublicKey.slice(4, 68)))
 }
