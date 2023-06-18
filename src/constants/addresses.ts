@@ -29,13 +29,13 @@ export const RULES_TOKENS_ADDRESSES = {
 }
 
 /* Starknet ETH */
-export const ETH_ADDRESSES: AddressMap = {
+export const ETH_ADDRESSES = {
   [StarknetChainId.GOERLI]: '0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7',
   [StarknetChainId.MAINNET]: '0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7',
 }
 
 /* Marketplace */
-export const MARKETPLACE_ADDRESSES: AddressMap = {
+export const MARKETPLACE_ADDRESSES = {
   [StarknetChainId.GOERLI]: '0xc56773d8708c7146e127d7c20e7e4321279db15731ebb1c6dbd1b46b5d0f27',
   [StarknetChainId.MAINNET]: '0x63a4b3b0122cdaa6ba244739add94aed1d31e3330458cda833a8d119f28cbe8',
 }

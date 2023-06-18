@@ -1,5 +1,5 @@
 import { AlchemyProvider } from 'ethers'
-import { Account, ProviderInterface, SequencerProvider, constants, stark, typedData, uint256 } from 'starknet'
+import { Account, Call, ProviderInterface, SequencerProvider, constants, stark, typedData, uint256 } from 'starknet'
 
 import { NetworkInfos, RulesSdkOptions, FullBlock, Uint256, Signature } from '../types'
 import { RulesSdkInterface } from './interface'
@@ -181,7 +181,7 @@ export class RulesSdk implements RulesSdkInterface {
     amount: number,
     salt: string,
     signature: Signature
-  ) {
+  ): Call {
     return {
       contractAddress: RULES_TOKENS_ADDRESSES[this.networkInfos.starknetChainId],
       entrypoint: 'redeem_voucher',
@@ -198,7 +198,7 @@ export class RulesSdk implements RulesSdkInterface {
     price: string,
     salt: string,
     signature: Signature
-  ) {
+  ): Call {
     return {
       contractAddress: MARKETPLACE_ADDRESSES[this.networkInfos.starknetChainId],
       entrypoint: 'cancel_order',
@@ -216,7 +216,7 @@ export class RulesSdk implements RulesSdkInterface {
     price: string,
     salt: string,
     signature: Signature
-  ) {
+  ): Call {
     return {
       contractAddress: MARKETPLACE_ADDRESSES[this.networkInfos.starknetChainId],
       entrypoint: 'fulfill_order',
@@ -235,7 +235,7 @@ export class RulesSdk implements RulesSdkInterface {
     price: string,
     salt: string,
     signature: Signature
-  ) {
+  ): Call {
     return {
       contractAddress: MARKETPLACE_ADDRESSES[this.networkInfos.starknetChainId],
       entrypoint: 'redeem_voucher_and_fulfill_order',
