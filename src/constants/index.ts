@@ -116,3 +116,10 @@ export const DUMMY_PK = '0xB00B135'
 export const ACCOUNT_CLASS_HASH = '0x1c644efdf255bffbac0bc7915e969edac4c0bcae5f162dc47382c2fd4fff4ab'
 export const RULES_TOKENS_CLASS_HASH = '0x7aeabbf026b49574a44d0b0b759275f8774189bc2ebbb0f38db225fb3482cb0'
 export const MARKETPLACE_CLASS_HASH = '0x9a53196037550a56cb163bf8c495f4c6c2c8d4f2cd4f30f1857cf39aff66ba'
+
+export enum ItemType {
+  NATIVE,
+  ERC_20,
+  ERC_712,
+  ERC_1155,
+}
