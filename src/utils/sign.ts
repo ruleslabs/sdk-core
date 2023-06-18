@@ -10,7 +10,7 @@ export async function isHashSignatureValid(hash: string, signature: Signature, p
   )
 }
 
-export async function signHash(hash: string, pk: string) {
+export function signHash(hash: string, pk: string) {
   return formatSignature(ec.starkCurve.sign(hash, pk))
 }
 
