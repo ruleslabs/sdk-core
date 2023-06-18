@@ -1,5 +1,5 @@
 import { AlchemyProvider } from 'ethers'
-import { Account, ProviderInterface, SequencerProvider, constants, typedData, uint256 } from 'starknet'
+import { Account, ProviderInterface, SequencerProvider, constants, stark, typedData, uint256 } from 'starknet'
 
 import { NetworkInfos, RulesSdkOptions, FullBlock } from '../types'
 import { RulesSdkInterface } from './interface'
@@ -13,6 +13,7 @@ import {
   SN_NETWORKS_INFOS,
   StarknetNetworkName,
 } from '../constants'
+import { formatSignature } from '../utils/sign'
 
 export function buildAccount(
   provider: ProviderInterface,
@@ -112,24 +113,10 @@ export class RulesSdk implements RulesSdkInterface {
 
     const signature = await voucherSigner.signMessage(data)
 
-    return Array.isArray(signature)
-      ? {
-        r: signature[0],
-        s: signature[0],
-      }
-      : {
-        r: signature.r.toString(),
-        s: signature.s.toString(),
-      }
+    return formatSignature(signature)
   }
 
-  public async computeListingOrderHash(
-    offerer: string,
-    tokenId: string,
-    amount: number,
-    price: string,
-    salt: string
-  ) {
+  public async computeListingOrderHash(offerer: string, tokenId: string, amount: number, price: string, salt?: string) {
     const data = {
       message: {
         offerItem: {
@@ -145,7 +132,7 @@ export class RulesSdk implements RulesSdkInterface {
           itemType: ItemType.ERC_20,
         },
         endTime: 0,
-        salt,
+        salt: salt ?? stark.randomAddress(),
       },
       domain: {
         name: "Rules Marketplace",

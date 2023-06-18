@@ -1,4 +1,4 @@
-import { ec, num } from 'starknet'
+import { Signature as StarknetSignature, ec, num } from 'starknet'
 
 import { Signature } from '../types'
 
@@ -8,4 +8,16 @@ export async function isHashSignatureValid(hash: string, signature: Signature, p
     hash,
     publicKey
   )
+}
+
+export function formatSignature(signature: StarknetSignature) {
+  return Array.isArray(signature)
+    ? {
+      r: signature[0],
+      s: signature[0],
+    }
+    : {
+      r: signature.r.toString(),
+      s: signature.s.toString(),
+    }
 }
