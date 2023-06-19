@@ -233,18 +233,20 @@ export class RulesSdk implements RulesSdkInterface {
     tokenId: Uint256 | string,
     amount: number,
     price: string,
-    salt: string,
-    signature: Signature
+    voucherSalt: string,
+    voucherSignature: Signature,
+    orderSalt: string,
+    orderSignature: Signature
   ): Call {
     return {
       contractAddress: MARKETPLACE_ADDRESSES[this.networkInfos.starknetChainId],
       entrypoint: 'redeem_voucher_and_fulfill_order',
       calldata: [
-        ...getVoucherCalldata(offerer, tokenId, amount, salt),
-        ...getSignatureCalldata(signature),
+        ...getVoucherCalldata(offerer, tokenId, amount, voucherSalt),
+        ...getSignatureCalldata(voucherSignature),
 
-        ...getListingOrderCalldata(this.networkInfos.starknetChainId, tokenId, amount, price, salt),
-        ...getSignatureCalldata(signature),
+        ...getListingOrderCalldata(this.networkInfos.starknetChainId, tokenId, amount, price, orderSalt),
+        ...getSignatureCalldata(orderSignature),
       ],
     }
   }
