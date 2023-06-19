@@ -240,7 +240,7 @@ export class RulesSdk implements RulesSdkInterface {
   ): Call {
     return {
       contractAddress: MARKETPLACE_ADDRESSES[this.networkInfos.starknetChainId],
-      entrypoint: 'redeem_voucher_and_fulfill_order',
+      entrypoint: 'fulfill_order_with_voucher',
       calldata: [
         ...getVoucherCalldata(offerer, tokenId, amount, voucherSalt),
         ...getSignatureCalldata(voucherSignature),
