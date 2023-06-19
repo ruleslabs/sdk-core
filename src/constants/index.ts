@@ -88,8 +88,6 @@ export enum EventKeys {
   TRANSFER_SINGLE = '0x182d859c0807ba9db63baf8b9d9fdbfeb885d820be6e206b9dab626d995c433', // TransferSingle
   TRANSFER_BATCH = '0x2563683c757f3abe19c4b7237e2285d8993417ddffe0b54a19eb212ea574b08', // TransferBatch
 
-  ACCOUNT_UPGRADED = '0x2b2db2ed38136ca6c54b95187166f98ea84503db8768617a558705b508fec82', // AccountUpgraded
-
   SIGNER_ESCAPE_TRIGGERED = '0x2707ca142d3372814b637f70df7ac4bf96aaea1ca79a385e0925dd420380164', // SignerEscapeTriggered
   SIGNER_ESCAPED = '0x3be5f03402711c65afe7d36fb0d16b3de28b1cd9b499ede52294d0f7ffd28f', // SignerEscaped
   SIGNER_PUBLIC_KEY_CHANGED = '0x13b83cdd8835621a1642174f11f8c47f6d2a97ea48342ef6e956af32cc89bee', // SignerPublicKeyChanged
@@ -98,6 +96,15 @@ export enum EventKeys {
   CANCEL_ORDER = '0xb792a85dbf71e2d3655418ca28e9946996c536760c97837abc48e81d429f79', // CancelOrder
 
   TRANSFER = '0x99cd8bde557814842a3121e8ddfd433a539b8c9f14bf31ebf108d12e6196e9', //Transfer
+}
+
+export enum OldEventKeys {
+  ACCOUNT_INITIALIZED = '0x00d876503fb434f7517a7b4ae8d0d5fba27e2fa7b1a9f200deb935316f46fcc3', // AccountInitialized
+  ACCOUNT_UPGRADED = '0x2b2db2ed38136ca6c54b95187166f98ea84503db8768617a558705b508fec82', // AccountUpgraded
+
+  OFFER_CREATED = '0x3dfc158c05b32ed2ffabe664bf6edb241c38aa671d19165307582cde75743b6', // OfferCreated
+  OFFER_CANCELED = '0x1a9f66f1b6840fc35aa5f06c683218c264c71b435dd5be19d94729df4532482', // OfferCanceled
+  OFFER_ACCEPTED = '0x309058ad25cd782e894bb5ed51758424e0fcfaf9b0e2996dec721837242fd4d', // OfferAccepted
 }
 
 export const WITHDRAW_MESSAGE = '0x0'
