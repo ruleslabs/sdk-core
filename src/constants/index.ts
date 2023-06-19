@@ -2,7 +2,6 @@ export * from './addresses'
 export * from './networks'
 
 import JSBI from 'jsbi'
-import { hash } from 'starknet'
 
 export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
 
@@ -85,24 +84,20 @@ export const CAIRO_FIELD_PRIME_CID = 'QmNssyH6oBvgZBcS7pB8v7hUbBx2ntxfd5NdBY6kyF
 
 // EVENTS
 
-export const EventKeys = {
-  TRANSFER_SINGLE: hash.getSelectorFromName('TransferSingle'),
-  TRANSFER_BATCH: hash.getSelectorFromName('TransferBatch'),
+export enum EventKeys {
+  TRANSFER_SINGLE = '0x182d859c0807ba9db63baf8b9d9fdbfeb885d820be6e206b9dab626d995c433', // TransferSingle
+  TRANSFER_BATCH = '0x2563683c757f3abe19c4b7237e2285d8993417ddffe0b54a19eb212ea574b08', // TransferBatch
 
-  ACCOUNT_INITIALIZED: hash.getSelectorFromName('AccountInitialized'),
-  ACCOUNT_UPGRADED: hash.getSelectorFromName('AccountUpgraded'),
+  ACCOUNT_UPGRADED = '0x2b2db2ed38136ca6c54b95187166f98ea84503db8768617a558705b508fec82', // AccountUpgraded
 
-  SIGNER_ESCAPE_TRIGGERED: hash.getSelectorFromName('SignerEscapeTriggered'),
-  SIGNER_ESCAPED: hash.getSelectorFromName('SignerEscaped'),
-  SIGNER_PUBLIC_KEY_CHANGED: hash.getSelectorFromName('SignerPublicKeyChanged'),
+  SIGNER_ESCAPE_TRIGGERED = '0x2707ca142d3372814b637f70df7ac4bf96aaea1ca79a385e0925dd420380164', // SignerEscapeTriggered
+  SIGNER_ESCAPED = '0x3be5f03402711c65afe7d36fb0d16b3de28b1cd9b499ede52294d0f7ffd28f', // SignerEscaped
+  SIGNER_PUBLIC_KEY_CHANGED = '0x13b83cdd8835621a1642174f11f8c47f6d2a97ea48342ef6e956af32cc89bee', // SignerPublicKeyChanged
 
-  OFFER_CREATED: hash.getSelectorFromName('OfferCreated'),
-  OFFER_CANCELED: hash.getSelectorFromName('OfferCanceled'),
-  OFFER_ACCEPTED: hash.getSelectorFromName('OfferAccepted'),
+  FULLFILL_ORDER = '0x377cbc684ca4dbfb21e6b0171e1753221b0bc29d43dd82a782039fd43f2e856', // FulfillOrder
+  CANCEL_ORDER = '0xb792a85dbf71e2d3655418ca28e9946996c536760c97837abc48e81d429f79', // CancelOrder
 
-  APPROVAL_FOR_ALL: hash.getSelectorFromName('ApprovalForAll'),
-
-  TRANSFER: hash.getSelectorFromName('Transfer'),
+  TRANSFER = '0x99cd8bde557814842a3121e8ddfd433a539b8c9f14bf31ebf108d12e6196e9', //Transfer
 }
 
 export const WITHDRAW_MESSAGE = '0x0'

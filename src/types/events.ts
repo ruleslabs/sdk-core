@@ -1,43 +1,13 @@
+import { EventKeys } from '../constants'
+
 interface EventBase {
-  key: string
-}
-
-// Approve
-
-export interface ApprovalForAllEvent extends EventBase {
-  owner: string
-  operator: string
-  approved: boolean
-}
-
-export interface ApprovalEvent extends EventBase {
-  owner: string
-  operator: string
-  tokenId: string
-  amount: bigint
-  type: 'pack' | 'card'
-}
-
-// Offers
-
-export interface OfferAcceptedEvent extends EventBase {
-  tokenId: string
-  buyer: string
-}
-
-export interface OfferCanceledEvent extends EventBase {
-  tokenId: string
-}
-
-export interface OfferCreatedEvent extends EventBase {
-  tokenId: string
-  seller: string
-  price: string
+  key: EventKeys
 }
 
 // Transfers
 
 export interface TransferSingleEvent extends EventBase {
+  key: EventKeys.TRANSFER_SINGLE
   operator: string
   from: string
   to: string
@@ -47,6 +17,7 @@ export interface TransferSingleEvent extends EventBase {
 }
 
 export interface TransferEvent extends EventBase {
+  key: EventKeys.TRANSFER
   from: string
   to: string
   value: string
@@ -55,28 +26,37 @@ export interface TransferEvent extends EventBase {
 
 // Account
 
-export interface AccountInitializedEvent extends EventBase {
-  signerPublicKey: string
-  guardianPublicKey: string
+export interface SignerPublicKeyChangedEvent extends EventBase {
+  key: EventKeys.SIGNER_PUBLIC_KEY_CHANGED
+  newPublicKey: string
 }
 
-export interface SignerPublicKeyChangedEvent extends EventBase {
-  newPublicKey: string
+// Orders
+
+export interface FulfillOrderEvent extends EventBase {
+  key: EventKeys.FULLFILL_ORDER
+  hash: string
+  offerer: string
+  offeree: string
+  tokenId: string
+  amount: number
+  price: string
+}
+
+export interface CancelOrderEvent extends EventBase {
+  key: EventKeys.CANCEL_ORDER
+  hash: string
 }
 
 // events parser
 
 export type ParsedEvent =
-  ApprovalForAllEvent |
-  ApprovalEvent |
-  OfferAcceptedEvent |
-  OfferCanceledEvent |
-  OfferCreatedEvent |
-  TransferSingleEvent |
-  TransferSingleEvent[] |
-  TransferEvent |
-  AccountInitializedEvent |
-  SignerPublicKeyChangedEvent
+  | TransferSingleEvent
+  | TransferSingleEvent[]
+  | TransferEvent
+  | SignerPublicKeyChangedEvent
+  | FulfillOrderEvent
+  | CancelOrderEvent
 
 // parsed messages interfaces
 
