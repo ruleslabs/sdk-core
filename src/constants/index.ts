@@ -109,7 +109,7 @@ export const DUMMY_PK = '0xB00B135'
 // Class hashes
 
 export const ACCOUNT_CLASS_HASH = '0x1c644efdf255bffbac0bc7915e969edac4c0bcae5f162dc47382c2fd4fff4ab'
-export const RULES_TOKENS_CLASS_HASH = '0x496dbd72ded89a54ef39b54abba22b48c8df9e3378cfd6e291344894818da9f'
+export const RULES_TOKENS_CLASS_HASH = '0xf85df4e02c745d0239d9bcdb5676f30b07dea78c9a0fcec265c39a93ae8516'
 export const MARKETPLACE_CLASS_HASH = '0x484bb8180a870ff6f42209c9ace3ab08102310279d44b84d81f13824f040141'
 
 export enum ItemType {
