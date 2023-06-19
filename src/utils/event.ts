@@ -1,11 +1,15 @@
 import { encode } from '..'
-import { ETH_ADDRESSES, EventKeys, ItemType, RULES_TOKENS_ADDRESSES, StarknetChainId } from '../constants'
-import { ParsedEvent, TransferSingleEvent } from '../types'
+import { ETH_ADDRESSES, EventKeys, ItemType, OldEventKeys, RULES_TOKENS_ADDRESSES, StarknetChainId } from '../constants'
+import { ParsedEvent, ParsedOldEvent, TransferSingleEvent } from '../types'
 import { uint256 } from 'starknet'
 
 const nullAddressFilter = (addresses: string[]): string[] => addresses.filter((address) => address !== '0x0')
 
-export function parseEvent(chainId: StarknetChainId, key: string, data: string[]): [ParsedEvent, string[]] | [] {
+export function parseEvent(
+  chainId: StarknetChainId,
+  key: string,
+  data: string[]
+): [ParsedEvent | ParsedOldEvent, string[]] | [] {
   switch (key) {
     case EventKeys.TRANSFER_SINGLE:
       return [
@@ -104,6 +108,59 @@ export function parseEvent(chainId: StarknetChainId, key: string, data: string[]
         {
           key: EventKeys.CANCEL_ORDER,
           hash: data[0],
+        },
+        [],
+      ]
+
+    /**
+     * Old events
+     */
+
+    case OldEventKeys.OFFER_CREATED:
+      return [
+        {
+          key: OldEventKeys.OFFER_CREATED,
+          tokenId: encode.encodeUint256({ low: data[0], high: data[1] }),
+          seller: data[2],
+          price: data[3],
+        },
+        nullAddressFilter([data[2]]),
+      ]
+
+    case OldEventKeys.OFFER_CANCELED:
+      return [
+        {
+          key: OldEventKeys.OFFER_CANCELED,
+          tokenId: encode.encodeUint256({ low: data[0], high: data[1] }),
+        },
+        [],
+      ]
+
+    case OldEventKeys.OFFER_ACCEPTED:
+      return [
+        {
+          key: OldEventKeys.OFFER_ACCEPTED,
+          tokenId: encode.encodeUint256({ low: data[0], high: data[1] }),
+          buyer: data[2],
+        },
+        nullAddressFilter([data[2]]),
+      ]
+
+    case OldEventKeys.ACCOUNT_INITIALIZED:
+      return [
+        {
+          key: OldEventKeys.ACCOUNT_INITIALIZED,
+          signerPublicKey: data[0],
+          guardianPublicKey: data[1],
+        },
+        [],
+      ]
+
+    case EventKeys.SIGNER_PUBLIC_KEY_CHANGED:
+      return [
+        {
+          key: EventKeys.SIGNER_PUBLIC_KEY_CHANGED,
+          newPublicKey: data[0],
         },
         [],
       ]

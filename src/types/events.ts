@@ -1,7 +1,7 @@
-import { EventKeys } from '../constants'
+import { EventKeys, OldEventKeys } from '../constants'
 
 interface EventBase {
-  key: EventKeys
+  key: EventKeys | OldEventKeys
 }
 
 // Transfers
@@ -57,6 +57,42 @@ export type ParsedEvent =
   | SignerPublicKeyChangedEvent
   | FulfillOrderEvent
   | CancelOrderEvent
+
+/**
+ * Old events
+ */
+
+// Account
+
+export interface AccountInitializedEvent extends EventBase {
+  key: OldEventKeys.ACCOUNT_INITIALIZED
+  signerPublicKey: string
+  guardianPublicKey: string
+}
+
+// Offers
+
+export interface OfferAcceptedEvent extends EventBase {
+  key: OldEventKeys.OFFER_ACCEPTED
+  tokenId: string
+  buyer: string
+}
+
+export interface OfferCanceledEvent extends EventBase {
+  key: OldEventKeys.OFFER_CANCELED
+  tokenId: string
+}
+
+export interface OfferCreatedEvent extends EventBase {
+  key: OldEventKeys.OFFER_CREATED
+  tokenId: string
+  seller: string
+  price: string
+}
+
+// old events parser
+
+export type ParsedOldEvent = AccountInitializedEvent | OfferAcceptedEvent | OfferCanceledEvent | OfferCreatedEvent
 
 // parsed messages interfaces
 
