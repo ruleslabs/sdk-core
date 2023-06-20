@@ -1,5 +1,5 @@
 import { AlchemyProvider } from 'ethers'
-import { Account, Call, ProviderInterface, SequencerProvider, constants, stark, typedData, uint256 } from 'starknet'
+import { Account, Call, Calldata, ProviderInterface, SequencerProvider, constants, stark, typedData, uint256 } from 'starknet'
 
 import { NetworkInfos, RulesSdkOptions, FullBlock, Uint256, Signature } from '../types'
 import { RulesSdkInterface } from './interface'
@@ -15,7 +15,7 @@ import {
   StarknetNetworkName,
 } from '../constants'
 import { formatSignature } from '../utils/sign'
-import { getListingOrderCalldata, getSignatureCalldata, getVoucherCalldata } from '../utils/calldata'
+import { getDeploymentDataCalldata, getListingOrderCalldata, getSignatureCalldata, getVoucherCalldata } from '../utils/calldata'
 
 export function buildAccount(
   provider: ProviderInterface,
@@ -230,11 +230,16 @@ export class RulesSdk implements RulesSdkInterface {
 
   public getVoucherReedemAndOrderFulfillCall(
     offerer: string,
+
+    offererDeploymentCalldata: Calldata,
+
     tokenId: Uint256 | string,
     amount: number,
     price: string,
+
     voucherSalt: string,
     voucherSignature: Signature,
+
     orderSalt: string,
     orderSignature: Signature
   ): Call {
@@ -247,6 +252,8 @@ export class RulesSdk implements RulesSdkInterface {
 
         ...getListingOrderCalldata(this.networkInfos.starknetChainId, tokenId, amount, price, orderSalt),
         ...getSignatureCalldata(orderSignature),
+
+        ...getDeploymentDataCalldata(offererDeploymentCalldata),
       ],
     }
   }

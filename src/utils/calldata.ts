@@ -1,7 +1,7 @@
-import { uint256 } from 'starknet'
+import { Calldata, hash, uint256 } from 'starknet'
 
 import { Signature, Uint256 } from '../types'
-import { ETH_ADDRESSES, ItemType, RULES_TOKENS_ADDRESSES, StarknetChainId } from '../constants'
+import { ACCOUNT_CLASS_HASH, ETH_ADDRESSES, ItemType, RULES_TOKENS_ADDRESSES, StarknetChainId } from '../constants'
 
 export function getVoucherCalldata(
   receiver: string,
@@ -61,6 +61,17 @@ export function getListingOrderCalldata(
     { endTime: 0 },
 
     { salt },
+  ]
+}
+
+export function getDeploymentDataCalldata(deploymentCalldata: Calldata) {
+  const calldataHash = hash.computeHashOnElements(deploymentCalldata);
+
+  return [
+    { publicKey: deploymentCalldata[0] },
+    { classHash: ACCOUNT_CLASS_HASH },
+    { calldataHash },
+    { deployer: 0 },
   ]
 }
 
