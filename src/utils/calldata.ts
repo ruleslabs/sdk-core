@@ -64,7 +64,9 @@ export function getListingOrderCalldata(
   ]
 }
 
-export function getDeploymentDataCalldata(deploymentCalldata: Calldata) {
+export function getDeploymentDataCalldata(deploymentCalldata?: Calldata) {
+  if (!deploymentCalldata) return [0, 0, 0, 0]
+
   const calldataHash = hash.computeHashOnElements(deploymentCalldata);
 
   return [

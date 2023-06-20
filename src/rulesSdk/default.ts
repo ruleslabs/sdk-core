@@ -231,8 +231,6 @@ export class RulesSdk implements RulesSdkInterface {
   public getVoucherReedemAndOrderFulfillCall(
     offerer: string,
 
-    offererDeploymentCalldata: Calldata,
-
     tokenId: Uint256 | string,
     amount: number,
     price: string,
@@ -241,7 +239,9 @@ export class RulesSdk implements RulesSdkInterface {
     voucherSignature: Signature,
 
     orderSalt: string,
-    orderSignature: Signature
+    orderSignature: Signature,
+
+    offererDeploymentCalldata?: Calldata
   ): Call {
     return {
       contractAddress: MARKETPLACE_ADDRESSES[this.networkInfos.starknetChainId],
