@@ -3,6 +3,8 @@ export * from './networks'
 
 import JSBI from 'jsbi'
 
+import { WeiAmount } from '../fractions'
+
 export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
 
 export enum ScarcityName {
@@ -39,14 +41,12 @@ export const Seasons: {
   ],
 }
 
+export const CURRENT_SEASON = Object.keys(Seasons).map((season) => +season).sort((a, b) => b - a)[0]
+
 // Signer escape
 
-export const MINIMUM_ETH_BALANCE_TO_ESCAPE_SIGNER = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(15)) // 0.001 ETH
+export const MINIMUM_ETH_BALANCE_TO_ESCAPE_SIGNER = WeiAmount.fromEtherAmount(0.001)
 export const ESCAPE_SECURITY_PERIOD = 3 * 24 * 60 * 60 // 3 days
-
-// Version
-
-export const LATEST_ACCOUNT_VERSION = '0.2.0'
 
 // tx actions
 
@@ -64,14 +64,6 @@ export enum StarknetTransactionAction {
   OFFER_CANCELLATION = 'offer-cancellation',
   OFFER_ACCEPTANCE = 'offer-acceptance',
   LIVE_REWARDS_DELIVERY = 'live-rewards-delivery',
-}
-
-// wallet lock
-
-export enum StarknetWalletLockingReason {
-  SIGNER_ESCAPE = 'SIGNER_ESCAPE',
-  FORCED_UPGRADE = 'FORCED_UPGRADE',
-  MAINTENANCE = 'MAINTENANCE',
 }
 
 // C-Score
