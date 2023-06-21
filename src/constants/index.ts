@@ -3,8 +3,6 @@ export * from './networks'
 
 import JSBI from 'jsbi'
 
-import { WeiAmount } from '../fractions'
-
 export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
 
 export enum ScarcityName {
@@ -45,7 +43,7 @@ export const CURRENT_SEASON = Object.keys(Seasons).map((season) => +season).sort
 
 // Signer escape
 
-export const MINIMUM_ETH_BALANCE_TO_ESCAPE_SIGNER = WeiAmount.fromEtherAmount(0.001)
+export const MINIMUM_ETH_BALANCE_TO_ESCAPE_SIGNER = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(15)) // 0.001 ETH
 export const ESCAPE_SECURITY_PERIOD = 3 * 24 * 60 * 60 // 3 days
 
 // tx actions
