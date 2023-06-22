@@ -9,6 +9,8 @@ export enum ScarcityName {
   COMMON = 'common',
   PLATINIUM = 'platinium',
   HALLOWEEN = 'halloween',
+
+  HOLOGRAPHIC = 'holographic',
 }
 
 export const Seasons: {
@@ -35,6 +37,18 @@ export const Seasons: {
       maxSupply: 2175,
       maxLowSerial: 100,
       cScoreCoeff: 2.5,
+    },
+  ],
+  [2]: [
+    {
+      name: ScarcityName.COMMON,
+      maxLowSerial: 100,
+    },
+    {
+      name: ScarcityName.HOLOGRAPHIC,
+      maxSupply: 350,
+      maxLowSerial: 20,
+      cScoreCoeff: 10,
     },
   ],
 }
@@ -78,7 +92,6 @@ export enum EventKeys {
   TRANSFER_SINGLE = '0x182d859c0807ba9db63baf8b9d9fdbfeb885d820be6e206b9dab626d995c433', // TransferSingle
   TRANSFER_BATCH = '0x2563683c757f3abe19c4b7237e2285d8993417ddffe0b54a19eb212ea574b08', // TransferBatch
 
-  SIGNER_ESCAPE_TRIGGERED = '0x2707ca142d3372814b637f70df7ac4bf96aaea1ca79a385e0925dd420380164', // SignerEscapeTriggered
   SIGNER_ESCAPED = '0x3be5f03402711c65afe7d36fb0d16b3de28b1cd9b499ede52294d0f7ffd28f', // SignerEscaped
   SIGNER_PUBLIC_KEY_CHANGED = '0x13b83cdd8835621a1642174f11f8c47f6d2a97ea48342ef6e956af32cc89bee', // SignerPublicKeyChanged
 
@@ -89,6 +102,8 @@ export enum EventKeys {
 }
 
 export enum OldEventKeys {
+  SIGNER_ESCAPE_TRIGGERED = '0x2707ca142d3372814b637f70df7ac4bf96aaea1ca79a385e0925dd420380164', // SignerEscapeTriggered
+
   ACCOUNT_INITIALIZED = '0x00d876503fb434f7517a7b4ae8d0d5fba27e2fa7b1a9f200deb935316f46fcc3', // AccountInitialized
   ACCOUNT_UPGRADED = '0x2b2db2ed38136ca6c54b95187166f98ea84503db8768617a558705b508fec82', // AccountUpgraded
 
