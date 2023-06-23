@@ -10,7 +10,7 @@ export enum ScarcityName {
   PLATINIUM = 'platinium',
   HALLOWEEN = 'halloween',
 
-  HOLOGRAPHIC = 'holographic',
+  HOLOGRAPHIC = 'holo',
 }
 
 export const Seasons: {
