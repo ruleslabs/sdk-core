@@ -7,6 +7,8 @@ export const MaxUint256 = JSBI.BigInt('0xfffffffffffffffffffffffffffffffffffffff
 
 export enum ScarcityName {
   COMMON = 'common',
+  LIVE = 'live',
+
   PLATINIUM = 'platinium',
   HALLOWEEN = 'halloween',
 
@@ -49,6 +51,11 @@ export const Seasons: {
       maxSupply: 350,
       maxLowSerial: 20,
       cScoreCoeff: 10,
+    },
+    {
+      name: ScarcityName.LIVE,
+      maxLowSerial: 0,
+      cScoreCoeff: 15,
     },
   ],
 }
