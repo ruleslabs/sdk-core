@@ -48,7 +48,7 @@ export interface Uint256 {
   high: string
 }
 
-export type ScarcityName = 'common' | 'platinium' | 'halloween' | 'holo'
+export type ScarcityName = 'common' | 'platinium' | 'halloween' | 'holo' | 'live'
 
 export interface Signature {
   r: string
