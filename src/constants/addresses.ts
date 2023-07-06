@@ -10,10 +10,10 @@ function constructSameAddressMap(address: string, chainIds: SupportedChainId[]) 
   }, {} as any)
 }
 
-const constructSameEthereumAddressMap = (address: string) =>
+export const constructSameEthereumAddressMap = (address: string) =>
   constructSameAddressMap(address, Object.values(EthereumChainId) as EthereumChainId[])
 
-const constructSameStarknetAddressMap = (address: string) =>
+export const constructSameStarknetAddressMap = (address: string) =>
   constructSameAddressMap(address, Object.values(StarknetChainId) as StarknetChainId[])
 
 /* Kass contract Addresses */

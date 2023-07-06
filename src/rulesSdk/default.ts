@@ -266,9 +266,15 @@ export class RulesSdk implements RulesSdkInterface {
 
   public computeL1KassTokenAddress(l2TokenAddress: string) {
     const l1KassAddress = encode.removeHexPrefix(KASS_ADDRESSES[this.networkInfos.ethereumChainId]).padStart(0x28, '0')
-    const l1KassTokenBytecodeHash = encode.removeHexPrefix(L1_KASS_TOKEN_BYTECODE_HASH).padStart(0x40, '0')
+
     l2TokenAddress = encode.removeHexPrefix(l2TokenAddress).padStart(0x40, '0')
 
-    return keccak256(`0xff${l1KassAddress}${l2TokenAddress}${l1KassTokenBytecodeHash}`)
+    const l1KassTokenBytecodeHash = encode
+      .removeHexPrefix(L1_KASS_TOKEN_BYTECODE_HASH[this.networkInfos.ethereumChainId])
+      .padStart(0x40, '0')
+
+    const res = keccak256(`0xff${l1KassAddress}${l2TokenAddress}${l1KassTokenBytecodeHash}`)
+
+    return encode.addHexPrefix(res.substring(res.length - 0x28))
   }
 }
