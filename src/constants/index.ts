@@ -138,3 +138,7 @@ export enum ItemType {
   ERC_712,
   ERC_1155,
 }
+
+// KASS
+
+export const L1_KASS_TOKEN_BYTECODE_HASH = '0x946bb0b5e0c21d31122c0eada2759f3f3f2d5dd41f36050206f5e1348e0401e'

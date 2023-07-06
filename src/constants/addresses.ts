@@ -3,22 +3,22 @@ import { StarknetChainId, EthereumChainId } from './networks'
 
 // Contracts
 
-function constructSameAddressMap(address: string, chainIds: SupportedChainId[]): AddressMap {
-  return chainIds.reduce<AddressMap>((acc, chainId) => {
+function constructSameAddressMap(address: string, chainIds: SupportedChainId[]) {
+  return chainIds.reduce<Record<SupportedChainId, string>>((acc, chainId) => {
     acc[chainId] = address
     return acc
   }, {} as any)
 }
 
-const constructSameEthereumAddressMap = (address: string): AddressMap =>
+const constructSameEthereumAddressMap = (address: string) =>
   constructSameAddressMap(address, Object.values(EthereumChainId) as EthereumChainId[])
 
-const constructSameStarknetAddressMap = (address: string): AddressMap =>
+const constructSameStarknetAddressMap = (address: string) =>
   constructSameAddressMap(address, Object.values(StarknetChainId) as StarknetChainId[])
 
 /* Kass contract Addresses */
-export const KASS_ADDRESSES: AddressMap = {
-  ...constructSameEthereumAddressMap('0xdead'),
+export const KASS_ADDRESSES = {
+  ...constructSameEthereumAddressMap('0x60f708e94b4da70727102f0a6f2aefb7a1ee0dfe'),
   ...constructSameStarknetAddressMap('0xdead'),
 }
 
@@ -41,10 +41,10 @@ export const MARKETPLACE_ADDRESSES = {
 }
 
 /* Starkgate contract addresses */
-export const STARKGATE_ADDRESSES: AddressMap = {
+export const STARKGATE_ADDRESSES = {
+  ...constructSameStarknetAddressMap('0x73314940630fd6dcda0d772d4c972c4e0a9946bef9dabf4ef84eda8ef542b82'),
   [EthereumChainId.GOERLI]: '0xc3511006C04EF1d78af4C8E0e74Ec18A6E64Ff9e',
   [EthereumChainId.MAINNET]: '0xae0Ee0A63A2cE6BaeEFFE56e7714FB4EFE48D419',
-  ...constructSameStarknetAddressMap('0x73314940630fd6dcda0d772d4c972c4e0a9946bef9dabf4ef84eda8ef542b82'),
 }
 
 /* Multicall */

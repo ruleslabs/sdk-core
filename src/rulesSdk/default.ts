@@ -1,5 +1,5 @@
-import { AlchemyProvider } from 'ethers'
-import { Account, Call, Calldata, ProviderInterface, SequencerProvider, constants, stark, typedData, uint256 } from 'starknet'
+import { AlchemyProvider, keccak256 } from 'ethers'
+import { Account, Call, Calldata, ProviderInterface, SequencerProvider, constants, encode, stark, typedData, uint256 } from 'starknet'
 
 import { NetworkInfos, RulesSdkOptions, FullBlock, Uint256, Signature } from '../types'
 import { RulesSdkInterface } from './interface'
@@ -8,6 +8,8 @@ import {
   DUMMY_PK,
   ETH_ADDRESSES,
   ItemType,
+  KASS_ADDRESSES,
+  L1_KASS_TOKEN_BYTECODE_HASH,
   MARKETPLACE_ADDRESSES,
   RULES_TOKENS_ADDRESSES,
   RulesAccount,
@@ -256,5 +258,17 @@ export class RulesSdk implements RulesSdkInterface {
         ...getDeploymentDataCalldata(offererDeploymentCalldata),
       ],
     }
+  }
+
+  /**
+   * KASS
+   */
+
+  public computeL1KassTokenAddress(l2TokenAddress: string) {
+    const l1KassAddress = encode.removeHexPrefix(KASS_ADDRESSES[this.networkInfos.ethereumChainId]).padStart(0x28, '0')
+    const l1KassTokenBytecodeHash = encode.removeHexPrefix(L1_KASS_TOKEN_BYTECODE_HASH).padStart(0x40, '0')
+    l2TokenAddress = encode.removeHexPrefix(l2TokenAddress).padStart(0x40, '0')
+
+    return keccak256(`0xff${l1KassAddress}${l2TokenAddress}${l1KassTokenBytecodeHash}`)
   }
 }
