@@ -2,7 +2,7 @@ export * from './addresses'
 export * from './networks'
 
 import JSBI from 'jsbi'
-import { constructSameStarknetAddressMap } from './addresses'
+import { constructSameEthereumAddressMap } from './addresses'
 
 export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
 
@@ -143,4 +143,4 @@ export enum ItemType {
 // KASS
 
 export const L1_KASS_TOKEN_BYTECODE_HASH =
-  constructSameStarknetAddressMap('0x946bb0b5e0c21d31122c0eada2759f3f3f2d5dd41f36050206f5e1348e0401e')
+  constructSameEthereumAddressMap('0x946bb0b5e0c21d31122c0eada2759f3f3f2d5dd41f36050206f5e1348e0401e')
