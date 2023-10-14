@@ -194,6 +194,25 @@ export class RulesSdk implements RulesSdkInterface {
     }
   }
 
+  public getVoucherRedeemToCall(
+    receiver: string,
+    to: string,
+    tokenId: Uint256 | string,
+    amount: number,
+    salt: string,
+    signature: Signature
+  ): Call {
+    return {
+      contractAddress: RULES_TOKENS_ADDRESSES[this.networkInfos.starknetChainId],
+      entrypoint: 'redeem_voucher_to',
+      calldata: [
+        { to },
+        ...getVoucherCalldata(receiver, tokenId, amount, salt),
+        ...getSignatureCalldata(signature),
+      ],
+    }
+  }
+
   public getOrderCancelationCall(
     tokenId: Uint256 | string,
     amount: number,
