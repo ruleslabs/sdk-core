@@ -1,6 +1,6 @@
 {
   "name": "@rulesorg/sdk-core",
-  "version": "1.4.29",
+  "version": "1.4.30",
   "description": "An SDK to build applications on top of Rules",
   "scripts": {
     "build": "tsup && npm run build:esm && npm run build:iife && npm run build:dts",
