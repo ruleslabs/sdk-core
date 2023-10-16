@@ -76,13 +76,13 @@ export class RulesSdk implements RulesSdkInterface {
     }
   }
 
-  public async signVoucherFor(receiver: string, tokenId: string, salt: string) {
+  public async signVoucherFor(receiver: string, tokenId: string, salt: string, amount: number = 1) {
     const data = {
       message: {
         receiver,
         tokenId: uint256.bnToUint256(tokenId),
         amount: {
-          low: 1,
+          low: amount,
           high: 0,
         },
         salt,
