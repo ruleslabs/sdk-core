@@ -1,5 +1,17 @@
 import { AlchemyProvider, keccak256 } from 'ethers'
-import { Account, Call, Calldata, ProviderInterface, SequencerProvider, constants, encode, stark, typedData, uint256 } from 'starknet'
+import {
+  Account,
+  BlockTag,
+  Call,
+  Calldata,
+  ProviderInterface,
+  RpcProvider,
+  encode,
+  num,
+  stark,
+  typedData,
+  uint256,
+} from 'starknet'
 
 import { NetworkInfos, RulesSdkOptions, FullBlock, Uint256, Signature } from '../types'
 import { RulesSdkInterface } from './interface'
@@ -30,9 +42,27 @@ export function buildAccount(
   return addresses.map((address, index) => new Account(provider, address, pks[index] ?? DUMMY_PK, '1'))
 }
 
-export class ExtendedSequencerProvider extends SequencerProvider {
+function block_id(blockIdentifier: Parameters<ProviderInterface['getBlock']>[0]): any {
+  if (typeof blockIdentifier === 'string' && num.isHex(blockIdentifier)) {
+    return { block_hash: blockIdentifier }
+  } else if (typeof blockIdentifier === 'bigint') {
+    return { block_hash: num.toHex(blockIdentifier) }
+  } else if (typeof blockIdentifier === 'number') {
+    return { block_number: blockIdentifier }
+  } else if (
+    typeof blockIdentifier === 'string' &&
+    Object.values(BlockTag).includes(blockIdentifier as BlockTag)
+  ) {
+    return blockIdentifier
+  } else {
+    // default
+    return BlockTag.pending;
+  }
+}
+
+export class ExtendedRpcProvider extends RpcProvider {
   public async getFullBlock(blockIdentifier: Parameters<ProviderInterface['getBlock']>[0]): Promise<FullBlock> {
-    return this.fetchEndpoint('get_block', { blockIdentifier }) as FullBlock
+    return this.fetchEndpoint('starknet_getBlockWithTxs', { block_id: block_id(blockIdentifier) }) as FullBlock
   }
 }
 
@@ -44,13 +74,13 @@ export class RulesSdk implements RulesSdkInterface {
 
   readonly alchemyProvider?: AlchemyProvider
 
-  readonly starknet: ExtendedSequencerProvider
+  readonly starknet: ExtendedRpcProvider
 
-  constructor(networkName: StarknetNetworkName, options: RulesSdkOptions = {}) {
+  constructor(networkName: StarknetNetworkName, nodeUrl: string, options: RulesSdkOptions = {}) {
     this.networkInfos = SN_NETWORKS_INFOS[networkName]
 
     // starknet provider
-    this.starknet = new ExtendedSequencerProvider({ network: networkName as any as constants.NetworkName })
+    this.starknet = new ExtendedRpcProvider({ nodeUrl })
 
     // alchemy
     if (options.alchemyApiKey) {
