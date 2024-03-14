@@ -1,6 +1,6 @@
 {
   "name": "@rulesorg/sdk-core",
-  "version": "1.4.32",
+  "version": "1.4.33",
   "description": "An SDK to build applications on top of Rules",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

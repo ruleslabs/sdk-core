@@ -34,6 +34,12 @@ export const ETH_ADDRESSES = {
   [StarknetChainId.MAINNET]: '0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7',
 }
 
+/* Starknet STRK */
+export const STRK_ADDRESSES = {
+  [StarknetChainId.GOERLI]: '0x4718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d',
+  [StarknetChainId.MAINNET]: '0x4718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d',
+}
+
 /* Marketplace */
 export const MARKETPLACE_ADDRESSES = {
   [StarknetChainId.GOERLI]: '0x59a79044f8a816a4bd6c5cdd992fbeb26b81747fb8de4cb6ec021f8b6858d6d',
